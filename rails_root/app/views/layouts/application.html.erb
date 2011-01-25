@@ -2,18 +2,34 @@
 <html>
 <head>
   <title>Ohfy</title>
-  <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag :defaults %>
+  <%= stylesheet_link_tag 'ohfy' %>
+  <%= javascript_include_tag :defaults, 'jquery.1.4.2' %>
   <%= csrf_meta_tag %>
 </head>
 <body>
 
-<div id='messages'>
-	<%= flash[:notice] %>
-	<%= flash[:alert] %>
-</div>
+<div id="container">
+	<div class="menu">
+		<% if user_signed_in? %>
+			Welcome, <%= link_to(current_user.email, edit_user_registration_path) %>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+		  	<%= link_to('Sign Out', destroy_user_session_path) %>        
+		<% else %>
+		  	<%= link_to('Sign In', new_user_session_path) %>  
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<%= link_to('Sign Up', new_user_registration_path) %>
+		<% end %>
+	</div>
 
-<%= yield %>
+	<%= yield %>
+	
+	<div id='messages'>
+		<div><%= yield :message %></div>
+		<div><%= flash[:notice] %></div>
+		<div><%= flash[:alert] %></div>
+	</div>
+
+</div>
 
 </body>
 </html>

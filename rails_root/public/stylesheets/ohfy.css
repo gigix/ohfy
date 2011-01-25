@@ -1,0 +1,115 @@
+html {
+  background: none repeat scroll 0 0 transparent;
+}
+
+body {
+	background: url("/images/blackboard.png") no-repeat fixed 50% 0 #000000;
+	color: #FFFFFF;
+}
+
+a {
+	color: #FFFFFF;
+}
+
+a:hover {
+	text-shadow: 0 0 10px #00CCFF !important;
+}
+
+#messages {
+	margin-top: 40px;
+	text-align: right;
+	font-size: smaller;
+}
+
+#container {
+	font-family: fantasy;
+	margin: 0 auto;
+	overflow: hidden;
+	width: 800px;
+}
+
+.menu {
+	text-align: right;
+	height: 30px;
+	padding-top: 5px;
+	margin-bottom: 20px;
+}
+
+.menu a {
+	text-decoration: none;
+	text-shadow: 0 0 2px #000000;
+}
+
+.calendar {
+	height: 480px;
+}
+
+.calendar .date {
+	font-size: 25px;
+	text-align: center;
+	vertical-align: middle;
+	float: left;
+	height: 94px;
+	width: 103px;
+	margin-left: 5px;
+}
+
+.calendar .header {
+	height: 30px;
+	font-size: 20px;
+}
+
+.calendar .unknown {
+	background-image: url("/images/grid-unknown.png");
+}
+
+.sticker {
+	margin: 0 auto;
+	overflow: hidden;
+	width: 410px;
+	height: 406px;
+	background-image: url("/images/sticker.png");
+	color: #000000;
+}
+
+.sticker a {
+	color: #000000;
+}
+
+.sticker .content {
+	margin-top: 35px;
+	margin-left: 40px;
+}
+
+.sticker input[type="text"], .sticker input[type="password"] {
+	margin-left: 15px;
+	background: #FBF181;
+	border: none;
+	border-bottom: dashed 1px;
+	font-family: fantasy;
+	font-size: 20px;
+}
+
+.sticker input[type="submit"] {
+	font-family: fantasy;
+	font-size: 16px;
+	float: left;
+	margin-right: 50px;
+}
+
+.sticker .smaller input {
+	font-size: 15px;
+}
+
+.sticker .field_with_errors {
+	color: red;
+}
+
+.sticker .field_with_errors input {
+	border: dashed 1px red;
+}
+
+.sticker .fyi {
+	font-style: italic;
+	font-size: smaller;
+}

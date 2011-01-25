@@ -9,10 +9,25 @@ class User < ActiveRecord::Base
   
   has_many :plans
   
-  def create_plan!(for_date, habit_names)
-    plan = self.plans.create!(:duration => for_date.strftime("%Y-%m"))
+  def create_plan!(from_date, habit_names)
+    self.active_plans.each {|plan| plan.abandon!}
+
+    plan = self.plans.create!(:start_from => from_date, :status => Plan::Status::ACTIVE)
+    
     habit_names.each do |name|
-      plan.habits.create!(:title => name)
+      habit = plan.habits.create!(:title => name)
+    end
+    
+    return plan
+  end
+  
+  def active_plans
+    plans.select{|plan| plan.active?}
+  end
+  
+  def current_plan
+    active_plans.detect do |plan|
+      (Date.today - plan.start_from) < 30
     end
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110123040235) do
+ActiveRecord::Schema.define(:version => 20110124121153) do
 
   create_table "activities", :force => true do |t|
     t.integer  "execution_id"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(:version => 20110123040235) do
 
   create_table "executions", :force => true do |t|
     t.integer  "plan_id"
-    t.date     "duration"
+    t.date     "date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -36,7 +36,8 @@ ActiveRecord::Schema.define(:version => 20110123040235) do
 
   create_table "plans", :force => true do |t|
     t.integer  "user_id"
-    t.string   "duration"
+    t.date     "start_from"
+    t.string   "status",     :default => "active"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

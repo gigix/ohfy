@@ -1,18 +1,29 @@
-<h2>Sign up</h2>
+<%
+	unless(devise_error_messages!().blank?) 
+		message("Please fill the grids marked RED correctly.".html_safe)
+	end
+%>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<div class='sticker'>
+	<div class='content'>
+		<h2>I want to join ...</h2>
 
-  <p><%= f.label :email %><br />
-  <%= f.text_field :email %></p>
+		<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+		  <p><%= f.label :email %>
+		  <%= f.text_field :email %></p>
 
-  <p><%= f.label :password %><br />
-  <%= f.password_field :password %></p>
+		  <p><%= f.label :password %>
+		  <%= f.password_field :password %></p>
 
-  <p><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation %></p>
+		  <p><%= f.label :password_confirmation %>
+		  <%= f.password_field :password_confirmation %></p>
 
-  <p><%= f.submit "Sign up" %></p>
-<% end %>
-
-<%= render :partial => "devise/shared/links" %>
+		  	<p>
+				<%= f.submit "Sign up" %>
+				<span>
+					<%= link_to "Forgot your password?", new_password_path(resource_name) %>
+				</span>
+			</p>
+		<% end %>
+	</div>
+</div>

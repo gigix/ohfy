@@ -1,16 +1,39 @@
 require 'spec_helper'
 
 describe User do
-  it "can create a plan" do
-    user = User.create!(:email => 'user@test.com', :password => 'P@55w0rd')
+  before(:each) do
+    @nick = create_test_user
+  end
+  
+  describe :create_plan do
+    it "creates a plan" do    
+      from_date = Date.today
+      lambda do
+        @nick.create_plan!(from_date, ['Drawing', 'Guitar', 'Gym'])
+      end.should change(Plan, :count).by(1)
     
-    lambda do
-      user.create_plan!(DateTime.parse('2011-1-23'), ['Drawing', 'Guitar', 'Gym'])
-    end.should change(Plan, :count).by(1)
+      @nick.should have(1).plan
+      plan = @nick.plans.first
+      plan.start_from.should == from_date
+      plan.should have(3).habits
     
-    user.should have(1).plan
-    plan = user.plans.first
-    plan.duration.should == "2011-01"
-    plan.should have(3).habits
+      plan.should have(30).executions
+      plan.executions.first.date.should == from_date
+      plan.executions.last.date.should == from_date + 29.days
+    end
+  end
+  
+  describe :current_plan do
+    it "returns nil if no plan covers today" do
+      @nick.current_plan.should be_nil
+      
+      @nick.create_plan!(Date.today - 2.months, ['Gym'])
+      @nick.current_plan.should be_nil
+    end
+    
+    it "returns current plan" do
+      plan = @nick.create_plan!(Date.today - 2.days, ['Gym'])
+      @nick.current_plan.should == plan
+    end
   end
 end
