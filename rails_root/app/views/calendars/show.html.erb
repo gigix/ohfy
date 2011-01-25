@@ -1,1 +1,32 @@
-<%= draw_plan(current_user.current_plan) %>
+<% if current_user.current_plan %>
+	<%= draw_plan(current_user.current_plan) %>
+<% else %>
+	<div class='sticker'>
+		<div class='content'>
+			<h2>I plan to do ...</h3>
+			<% form_tag(plans_path, :method => :post) do %>
+				<div class='row'>
+					<div class='column_left'>&nbsp;</div>
+					<div class='column_right'><%= text_field_tag 'habits[]' %></div>
+				</div>
+				<div class='row'>
+					<div class='column_left'>and </div>
+					<div class='column_right'><%= text_field_tag 'habits[]' %></div>
+				</div>
+				<div class='row'>
+					<div class='column_left'>and </div>
+					<div class='column_right'><%= text_field_tag 'habits[]' %></div>
+				</div>
+				<h3>in a month starts from ...</h3>
+				<div class='row'>
+					<div class='column_left fyi'>YYYY-mm-dd</div>
+					<div class='column_right'><%= text_field_tag 'start_from' %></div>
+				</div>
+				<div class='row'>
+					<div class='column_left'>&nbsp;</div>
+					<div class='column_right' style='padding-left: 230px; padding-top: 10px'><%= submit_tag "That's it!" %></div>
+				</div>
+			<% end %>
+		</div>
+	</div>
+<% end %>

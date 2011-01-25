@@ -72,6 +72,11 @@ a:hover {
 	color: #000000;
 }
 
+.sticker h2 {
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
 .sticker a {
 	color: #000000;
 }
@@ -112,4 +117,19 @@ a:hover {
 .sticker .fyi {
 	font-style: italic;
 	font-size: smaller;
+}
+
+.sticker .row {
+	margin-bottom: 10px;
+}
+
+.sticker .row .column_left {
+	width: 20%;
+	float: left;
+	text-align: right;
+	padding-top: 10px;
+}
+
+.sticker .row .column_right {
+
 }

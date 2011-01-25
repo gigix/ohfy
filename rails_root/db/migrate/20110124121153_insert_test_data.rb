@@ -4,6 +4,8 @@ class InsertTestData < ActiveRecord::Migration
     
     user = User.create!(:email => 'user@test.com', :password => 'password')
     user.create_plan!(Date.today, ['Gym', 'Drawing', 'Djembe'])
+    
+    User.create!(:email => 'empty.user@test.com', :password => 'password')
   end
 
   def self.down

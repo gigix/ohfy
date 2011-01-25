@@ -8,7 +8,7 @@ describe CalendarsController do
     end
     
     it "renders if user signed in" do
-      user = User.create!(:email => 'user@test.com', :password => 'P@55w0rd')
+      user = create_test_user
       sign_in user
       
       get :show

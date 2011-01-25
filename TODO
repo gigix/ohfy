@@ -1,15 +1,16 @@
 ===== Done =====
 UI Tweaks: navigation menus, session related pages
+Sign out
+Create plan
 
 
 ===== Stories =====
-Create plan for next month
 Record execution of current day
 Status highlight
-Sign out
-
+Support more than one active plans
 
 ===== Defects =====
 
 
 ===== Tasks =====
+UI Tweak: styling buttons (for Safari)

@@ -9,7 +9,9 @@ class User < ActiveRecord::Base
   
   has_many :plans
   
-  def create_plan!(from_date, habit_names)
+  def create_plan!(from_date, habit_names)    
+    from_date = Date.parse(from_date) if(from_date.is_a?(String))
+    
     self.active_plans.each {|plan| plan.abandon!}
 
     plan = self.plans.create!(:start_from => from_date, :status => Plan::Status::ACTIVE)

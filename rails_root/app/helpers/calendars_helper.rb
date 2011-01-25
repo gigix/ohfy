@@ -1,7 +1,5 @@
 module CalendarsHelper
   def draw_plan(plan)
-    return %(<div class="warning">Please create a plan first</div>).html_safe unless plan
-    
     result = %(<div class="calendar">)
     
     Date::DAYNAMES.each do |name|

@@ -14,11 +14,6 @@ describe CalendarsHelper do
       result = helper.draw_plan(plan)
       assert_date_count(34, result)
     end
-    
-    it "generates warning div if plan is nil" do
-      result = helper.draw_plan(nil)
-      result.should =~ /<div class=\"warning\">/
-    end
   end
 end
 

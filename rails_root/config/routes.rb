@@ -4,4 +4,5 @@ Ohfy::Application.routes.draw do
   devise_for :users
   
   resource :calendar, :as => :calendar
+  resources :plans
 end
