@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :plans
   
   def create_plan!(from_date, habit_names)    
+    raise if habit_names.blank?
+    
     from_date = Date.parse(from_date) if(from_date.is_a?(String))
     
     self.active_plans.each {|plan| plan.abandon!}
