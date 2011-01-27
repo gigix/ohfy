@@ -5,4 +5,8 @@ Ohfy::Application.routes.draw do
   
   resource :calendar, :as => :calendar
   resources :plans
+  
+  resources :executions do
+    resources :activities
+  end
 end

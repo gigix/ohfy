@@ -1,5 +1,6 @@
 <% if current_user.current_plan %>
 	<%= draw_plan(current_user.current_plan) %>
+	<div id="execution_detail" class="sticker"></div>
 <% else %>
 	<div class='sticker'>
 		<div class='content'>

@@ -11,7 +11,10 @@ module CalendarsHelper
     end
     
     plan.executions.each do |execution|
-      result << %(<div class="date #{execution.status}">&nbsp;<br />#{execution.date.day}</div>)
+      result << %(
+        <div class="date #{execution.status}"
+        onclick="#{remote_function(:update => 'execution_detail', :url => execution_url(execution), :method => 'GET')}"
+        >&nbsp;<br />#{execution.date.day}</div>)
     end
     result += %(</div>)
     

@@ -52,6 +52,7 @@ a:hover {
 	height: 94px;
 	width: 103px;
 	margin-left: 5px;
+	cursor: pointer;
 }
 
 .calendar .header {
@@ -136,4 +137,13 @@ a:hover {
 
 .sticker .row .column_right {
 
+}
+
+#execution_detail {
+	width: 388px;
+	height: 328px;
+	position: absolute;
+	top: 25%;
+	left: 35%;
+	background-image: url("/images/big-grid-unknown.png");
 }
