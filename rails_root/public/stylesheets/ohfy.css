@@ -63,6 +63,10 @@ a:hover {
 	background-image: url("/images/grid-unknown.png");
 }
 
+.calendar .bad {
+	background-image: url("/images/grid-bad.png");
+}
+
 .sticker {
 	margin: 0 auto;
 	overflow: hidden;

@@ -3,7 +3,7 @@ class InsertTestData < ActiveRecord::Migration
     return unless RAILS_ENV == 'development'
     
     user = User.create!(:email => 'user@test.com', :password => 'password')
-    user.create_plan!(Date.today, ['Gym', 'Drawing', 'Djembe'])
+    user.create_plan!((Date.today - 10), ['Gym', 'Drawing', 'Djembe'])
     
     User.create!(:email => 'empty.user@test.com', :password => 'password')
   end

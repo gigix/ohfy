@@ -11,7 +11,7 @@ module CalendarsHelper
     end
     
     plan.executions.each do |execution|
-      result << %(<div class="date unknown">&nbsp;<br />#{execution.date.day}</div>)
+      result << %(<div class="date #{execution.status}">&nbsp;<br />#{execution.date.day}</div>)
     end
     result += %(</div>)
     

@@ -5,6 +5,10 @@ class Plan < ActiveRecord::Base
   
   after_create :create_executions
   
+  def execution_on(date)
+    executions.detect{|execution| execution.date == date}
+  end
+  
   class Status
     ACTIVE = 'active'
     ABANDONED = 'abandoned'
