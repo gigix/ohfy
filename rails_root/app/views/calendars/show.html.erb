@@ -1,6 +1,26 @@
 <% if current_user.current_plan %>
 	<%= draw_plan(current_user.current_plan) %>
-	<div id="execution_detail" class="sticker"></div>
+	<div id="execution_sticker" class="sticker">
+		<div class="close_button" onclick='hideExecutionDetail()'></div>
+		<div id="execution_detail"></div>
+	</div>
+	<script>
+		$('execution_sticker').hide()
+	
+		function showExecutionDetail() {
+			var detailSticker = $('execution_sticker')
+			if(!detailSticker.visible()) {
+				detailSticker.appear()
+			}
+		}
+		
+		function hideExecutionDetail() {
+			var detailSticker = $('execution_sticker')
+			if(detailSticker.visible()) {
+				detailSticker.fade()
+			}
+		}
+	</script>
 <% else %>
 	<div class='sticker'>
 		<div class='content'>

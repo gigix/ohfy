@@ -139,7 +139,7 @@ a:hover {
 
 }
 
-#execution_detail {
+#execution_sticker {
 	width: 388px;
 	height: 328px;
 	position: absolute;
@@ -148,18 +148,28 @@ a:hover {
 	background-image: url("/images/big-grid-great.png");
 }
 
-#execution_detail h3 {
+#execution_sticker .close_button {
+	width: 38px;
+	height: 37px;
+	position: absolute;
+	top: 20px;
+	left: 330px;
+	background-image: url("/images/cross-button.png");
+	cursor: pointer;
+}
+
+#execution_sticker h3 {
 	margin-bottom: 0px;
 	margin-left: 30px;
 }
 
-#execution_detail ul {
+#execution_sticker ul {
 	margin-top: 10px;
 	margin-left: 30px;
 	list-style: none;
 }
 
-#execution_detail li {
+#execution_sticker li {
 	width: 238px;
 	height: 66px;
 	background-image: url("/images/big-button.png");
