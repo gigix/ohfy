@@ -2,15 +2,20 @@
 UI Tweaks: navigation menus, session related pages
 Sign out
 Create plan
+Status highlight
 
 
 ===== Stories =====
 Record execution of current day
-Status highlight
 Support more than one active plans
 
+
+
 ===== Defects =====
+calendar grids are not changing their colors
+
 
 
 ===== Tasks =====
 UI Tweak: styling buttons (for Safari)
+UI redesign

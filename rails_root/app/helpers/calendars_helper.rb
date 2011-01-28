@@ -11,14 +11,12 @@ module CalendarsHelper
     end
     
     plan.executions.each do |execution|
-      result << %(
-        <div class="date #{execution.status}"
-        onclick="#{remote_function(
+      result << %(<div class="date #{execution.status} #{'actable' if execution.actable?}") 
+      result << %(onclick="#{remote_function(
           :update => 'execution_detail', 
           :url => execution_url(execution), 
-          :method => 'GET', 
-          :success => 'showExecutionDetail()')}"
-        >&nbsp;<br />#{execution.date.day}</div>)
+          :method => 'GET')}") if execution.actable?
+      result << %(>&nbsp;<br />#{execution.date.day}</div>)
     end
     result += %(</div>)
     

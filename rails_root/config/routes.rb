@@ -9,4 +9,6 @@ Ohfy::Application.routes.draw do
   resources :executions do
     resources :activities
   end
+  
+  match "executions/:execution_id/habits/:habit_id", :controller => :activities, :action => :toggle
 end

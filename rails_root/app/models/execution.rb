@@ -2,9 +2,17 @@ class Execution < ActiveRecord::Base
   belongs_to :plan
   has_many :activities
   has_many :habits, :through => :plan
+
+  def actable?
+    self.date == Date.today or self.date == Date.today - 1
+  end
   
-  def act!(habit_id)
-    self.activities.create!(:habit_id => habit_id)
+  def act!(habit)
+    self.activities.create!(:habit_id => habit.id)
+  end
+  
+  def deact!(habit)
+    self.activities.find_all_by_habit_id(habit.id).each{|activity| activity.destroy }
   end
   
   class Status
@@ -24,7 +32,10 @@ class Execution < ActiveRecord::Base
     return Status::GOOD
   end
   
-  private
+  def status_of(habit)
+    acted?(habit) ? 'acted' : 'not_acted'
+  end
+  
   def acted?(habit)
     not self.activities.find_by_habit_id(habit).blank?
   end

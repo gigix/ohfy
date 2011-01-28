@@ -1,6 +1,1 @@
-<h3><%= @execution.date.to_s %></h3>
-<ul>
-	<% @execution.habits.each do |habit| %>
-	<li><%= habit.title %></li>
-	<% end %>
-</ul>
+<%= render :partial => 'execution', :object => @execution %>

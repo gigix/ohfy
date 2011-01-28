@@ -12,7 +12,7 @@ describe Execution do
       execution = @plan.execution_on(date)
       
       lambda do
-        execution.habits.each{|habit| execution.act!(habit.id) }
+        execution.habits.each{|habit| execution.act!(habit) }
       end.should change(Activity, :count).by(3)
       
       execution.status.should == Execution::Status::GREAT

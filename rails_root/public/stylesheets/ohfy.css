@@ -52,6 +52,9 @@ a:hover {
 	height: 94px;
 	width: 103px;
 	margin-left: 5px;
+}
+
+.calendar .date.actable {
 	cursor: pointer;
 }
 
@@ -66,6 +69,14 @@ a:hover {
 
 .calendar .bad {
 	background-image: url("/images/grid-bad.png");
+}
+
+.calendar .good {
+	background-image: url("/images/grid-good.png");
+}
+
+.calendar .great {
+	background-image: url("/images/grid-great.png");
 }
 
 .sticker {
@@ -145,6 +156,21 @@ a:hover {
 	position: absolute;
 	top: 25%;
 	left: 35%;
+}
+
+#execution_sticker.unknown {
+	background-image: url("/images/big-grid-unknown.png");
+}
+
+#execution_sticker.bad {
+	background-image: url("/images/big-grid-bad.png");
+}
+
+#execution_sticker.good {
+	background-image: url("/images/big-grid-good.png");
+}
+
+#execution_sticker.great {
 	background-image: url("/images/big-grid-great.png");
 }
 
@@ -179,4 +205,12 @@ a:hover {
 	font-size: 40px;
 	font-style: bold;
 	cursor: pointer;
+}
+
+#execution_sticker li.acted {
+	background-image: url("/images/big-button-acted.png");
+}
+
+#execution_sticker li.not_acted {
+	background-image: url("/images/big-button-not-acted.png");
 }
