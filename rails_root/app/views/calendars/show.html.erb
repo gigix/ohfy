@@ -3,14 +3,17 @@
 	<%= draw_plan(current_user.current_plan) %>
 	
 	<script>
+		function setStatusClass(element, status) {
+			<%= Execution::Status.list.inspect.html_safe %>.each(function(classname) {
+				element.removeClassName(classname)
+			})
+			element.addClassName(status)
+		}
+	
 		function showExecutionDetail(status) {
 			var detailSticker = $('execution_sticker')
-			
-			$w(detailSticker.className).each(function(className) {
-				detailSticker.removeClassName(className)
-			})
-			detailSticker.addClassName(status)
-			
+			setStatusClass(detailSticker, status)
+
 			if(!detailSticker.visible()) {
 				detailSticker.appear()
 			}

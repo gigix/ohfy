@@ -5,14 +5,23 @@ Create plan
 Status highlight
 
 
+
 ===== Stories =====
 Record execution of current day
 Support more than one active plans
+
+[Further]
+Widget
+iPhone client
+Android client
+Community
+Color Themes
 
 
 
 ===== Defects =====
 calendar grids are not changing their colors
+timezone
 
 
 

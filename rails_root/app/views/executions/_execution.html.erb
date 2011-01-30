@@ -12,4 +12,7 @@
 
 <script>
 	showExecutionDetail('<%= execution.status %>')
+	
+	var smallSticker = $('execution-<%= execution.date %>')
+	setStatusClass(smallSticker, '<%= execution.status %>')
 </script>

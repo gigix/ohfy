@@ -20,6 +20,10 @@ class Execution < ActiveRecord::Base
     GOOD = 'good'
     BAD = 'bad'
     UNKNOWN = 'unknown'
+    
+    def self.list
+      [GREAT, GOOD, BAD, UNKNOWN]
+    end
   end
   
   def status
