@@ -40,11 +40,11 @@ a:hover {
 	text-shadow: 0 0 2px #000000;
 }
 
-.calendar {
+.ohfy_calendar {
 	height: 480px;
 }
 
-.calendar .date {
+.ohfy_calendar .date {
 	font-size: 25px;
 	text-align: center;
 	vertical-align: middle;
@@ -54,28 +54,37 @@ a:hover {
 	margin-left: 5px;
 }
 
-.calendar .date.actable {
+.ohfy_calendar .date.actable {
 	cursor: pointer;
 }
 
-.calendar .header {
+.ohfy_calendar .date .month_title {
+    font-size: 20px;
+    height: 20px;
+    margin-bottom: 5px;
+    margin-left: 20px;
+    margin-top: 10px;
+    text-align: left;
+}
+
+.ohfy_calendar .header {
 	height: 30px;
 	font-size: 20px;
 }
 
-.calendar .unknown {
+.ohfy_calendar .unknown {
 	background-image: url("/images/grid-unknown.png");
 }
 
-.calendar .bad {
+.ohfy_calendar .bad {
 	background-image: url("/images/grid-bad.png");
 }
 
-.calendar .good {
+.ohfy_calendar .good {
 	background-image: url("/images/grid-good.png");
 }
 
-.calendar .great {
+.ohfy_calendar .great {
 	background-image: url("/images/grid-great.png");
 }
 

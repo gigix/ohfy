@@ -1,0 +1,28 @@
+.ohfy-widget {
+	width: 210px;
+	height: 180px;
+}
+
+.ohfy-widget .date {
+	text-align: center;
+	width: 30px;
+	height: 30px;
+	float: left;
+	font-size: 13px;
+}
+
+.ohfy-widget .date.bad {
+	background-color: red;
+}
+
+.ohfy-widget .date.good {
+	background-color: blue;
+}
+
+.ohfy-widget .date.great {
+	background-color: green;
+}
+
+.ohfy-widget .date.unknown {
+	background-color: gray;
+}

@@ -5,7 +5,7 @@ describe CalendarsHelper do
     it "generates calendar div" do
       plan = Plan.create(:start_from => Date.parse("2011-1-2"))
       result = helper.draw_plan(plan)
-      result.should =~ /<div class=\"calendar\">/
+      result.should =~ /<div class='ohfy_calendar'>/
       assert_date_count(30, result)
     end
     
@@ -18,5 +18,5 @@ describe CalendarsHelper do
 end
 
 def assert_date_count(expected, result)
-  result.split("<div class=\"date").size.should == expected + 1 + 7
+  result.split("<div class='date").size.should == expected + 1 + 7
 end

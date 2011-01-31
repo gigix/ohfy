@@ -1,0 +1,40 @@
+function appendToHead(el) {
+    document.getElementsByTagName('head')[0].appendChild(el);
+}
+
+function create(el, opts) {
+    var opt,
+        element = document.createElement(el);
+    for (opt in opts) {
+        if (opts.hasOwnProperty(opt)) {
+            element[opt] = opts[opt];
+        }
+    }
+    return element;
+}
+
+function css() {
+    var i;
+    for (i = 0; i < arguments.length; i = i + 1) {
+        appendToHead(
+            create('link', {
+                rel: "stylesheet",
+                type: "text/css",
+                href: arguments[i],
+                media: "all"
+            })
+        );
+    }
+}
+
+css('<%= full_stylesheet_path("ohfy-widget") %>')
+
+document.write("\
+	<div class='ohfy-widget'>\
+		<% if @user.current_plan -%>
+			<%= draw_plan_in_widget(@user.current_plan) %>\
+		<% else -%>
+			This user doesn't have any plan currently.\
+		<% end -%>
+	</div>\
+")

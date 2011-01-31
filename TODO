@@ -3,11 +3,12 @@ UI Tweaks: navigation menus, session related pages
 Sign out
 Create plan
 Status highlight
+calendar grids are not changing their colors
+Record execution of current day
 
 
 
 ===== Stories =====
-Record execution of current day
 Support more than one active plans
 
 [Further]
@@ -20,7 +21,6 @@ Color Themes
 
 
 ===== Defects =====
-calendar grids are not changing their colors
 timezone
 
 
