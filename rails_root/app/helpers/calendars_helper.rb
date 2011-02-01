@@ -1,6 +1,6 @@
 module CalendarsHelper
-  def draw_plan(plan, execution_drawer = web_execution_drawer)
-    result = %(<div class='ohfy_calendar'>)
+  def draw_plan(plan, container_class = 'ohfy_calendar', execution_drawer = web_execution_drawer)
+    result = %(<div class='#{container_class}'>)
     
     Date::DAYNAMES.each do |name|
       result << %(<div class='date header'>#{name[0...3]}</div>)
@@ -20,9 +20,9 @@ module CalendarsHelper
   
   def draw_plan_in_widget(plan)
     widget_execution_drawer = Proc.new do |execution, result|
-      result << %(<div id='ohfy-execution-#{execution.date}' class='date #{execution.status}'>&nbsp;<br/>#{execution.date.day}</div>)
+      result << %(<div id='ohfy-execution-#{execution.date}' class='date #{execution.status}'>#{execution.date.day}</div>)
     end
-    draw_plan(plan, widget_execution_drawer)
+    draw_plan(plan, 'ohfy_widget_calendar', widget_execution_drawer)
   end
   
   private

@@ -9,9 +9,12 @@
 <body>
 
 <div id="container">
+	<h1><%= link_to('One Hour For Yourself', root_path) %></h1>
 	<div class="menu">
 		<% if user_signed_in? %>
 			Welcome, <%= link_to(current_user.email, edit_user_registration_path) %>
+			&nbsp;&nbsp;|&nbsp;&nbsp;
+			<%= link_to('Widget', widgets_path) %>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
 		  	<%= link_to('Sign Out', destroy_user_session_path) %>        
 		<% else %>
@@ -20,6 +23,8 @@
 			<%= link_to('Sign Up', new_user_registration_path) %>
 		<% end %>
 	</div>
+
+	<div style="clear: both; height: 20px"></div>
 
 	<%= yield %>
 	

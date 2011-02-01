@@ -11,6 +11,7 @@ Ohfy::Application.routes.draw do
   end
   
   resources :widgets
+  match 'widgets-style/ohfy-widget.css', :controller => :widgets, :action => :css
   
   match "executions/:execution_id/habits/:habit_id", :controller => :activities, :action => :toggle
 end

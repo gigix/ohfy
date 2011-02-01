@@ -28,6 +28,17 @@ a:hover {
 	width: 800px;
 }
 
+#container h1 {
+	float: left;
+	margin-top: 0;
+	font-family: cursive;
+}
+
+#container h1 a {
+	text-decoration: none;
+	text-shadow: 0 0 6px #000000;
+}
+
 .menu {
 	text-align: right;
 	height: 30px;
