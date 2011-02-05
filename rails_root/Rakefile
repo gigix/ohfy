@@ -6,5 +6,9 @@ require 'rake'
 
 Ohfy::Application.load_tasks
 
+task :spec do
+  raise unless system('rspec spec/')
+end
+
 Rake::Task[:default].prerequisites.clear
-task :default => %w(db:reset spec stats)
+task :default => %w(db:reset spec server:restart cucumber)

@@ -26,6 +26,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 end
 
+
 def create_test_user
   User.create!(:email => 'user@test.com', :password => 'P@55w0rd')
 end

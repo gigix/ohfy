@@ -1,6 +1,6 @@
 class InsertTestData < ActiveRecord::Migration
   def self.up
-    return unless RAILS_ENV == 'development'
+    return if RAILS_ENV == 'production'
     
     user = User.create!(:email => 'user@test.com', :password => 'password')
     user.create_plan!((Date.today - 10), ['Gym', 'Drawing', 'Djembe'])

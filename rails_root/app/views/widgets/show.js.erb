@@ -32,7 +32,7 @@ css('<%= full_asset_path("/widgets-style/ohfy-widget.css") %>')
 document.write("\
 	<div class='ohfy-widget'>\
 		<% if @user.current_plan -%>
-			<%= draw_plan_in_widget(@user.current_plan) %>\
+			<a href='<%= root_url %>' target='_blank'><%= draw_plan_in_widget(@user.current_plan) %></a>\
 		<% else -%>
 			This user doesn't have any plan currently.\
 		<% end -%>

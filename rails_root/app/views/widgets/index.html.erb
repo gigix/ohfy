@@ -1,5 +1,7 @@
-<script src="<%= full_asset_path(widget_path(current_user)) %>"></script>
+<% user = current_user || User.find(:first) %>
+
+<script src="<%= full_asset_path(widget_path(user)) %>"></script>
 
 <div style="clear:both; height: 30px"></div>
 
-<%= %(<script src="#{full_asset_path(widget_path(current_user))}"></script>) %>
+<%= %(<script src="#{full_asset_path(widget_path(user))}"></script>) %>
