@@ -1,6 +1,8 @@
-require 'spec_helper'
+require "#{File.dirname(__FILE__)}/../spec_helper"
 
 describe CalendarsController do
+  render_views
+  
   describe :show do
     it "redirects to signin page if user is not signed in" do
       get :show

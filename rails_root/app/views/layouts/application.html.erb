@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ohfy</title>
+  <title>1 Hour For Me</title>
   <%= stylesheet_link_tag 'ohfy' %>
   <%= javascript_include_tag :defaults %>
   <%= csrf_meta_tag %>
@@ -9,7 +9,7 @@
 <body>
 
 <div id="container">
-	<h1><%= link_to('One Hour For Yourself', root_path) %></h1>
+	<h1><%= link_to('1 Hour For Me', root_path) %></h1>
 	<div class="menu">
 		<% if user_signed_in? %>
 			Welcome, <%= link_to(current_user.email, edit_user_registration_path) %>
