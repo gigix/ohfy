@@ -80,6 +80,7 @@ GEM
     mongrel (1.2.0.pre2)
       daemons (~> 1.0.10)
       gem_plugin (~> 0.2.3)
+    newrelic_rpm (2.13.4)
     nokogiri (1.4.4)
     polyglot (0.3.1)
     rack (1.2.1)
@@ -141,6 +142,7 @@ DEPENDENCIES
   devise
   gizmo
   mongrel
+  newrelic_rpm
   rails (= 3.0.3)
   rspec
   rspec-rails
