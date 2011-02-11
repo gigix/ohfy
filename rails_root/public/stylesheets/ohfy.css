@@ -100,6 +100,19 @@ a:hover {
 	background-image: url("/images/grid-great.png");
 }
 
+.intro {
+	float: left;
+	width: 350px;
+	margin-right: 40px;
+	font-family: cursive;
+	font-size: 20px;
+	color: #FFFFFF;
+}
+
+.intro ul li {
+	list-style: circle;
+}
+
 .sticker {
 	margin: 0 auto;
 	overflow: hidden;

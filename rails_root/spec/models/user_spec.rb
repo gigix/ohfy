@@ -29,6 +29,9 @@ describe User do
       
       @nick.create_plan!(Date.today - 2.months, ['Gym'])
       @nick.current_plan.should be_nil
+      
+      @nick.create_plan!(Date.tomorrow, ['Gym'])
+      @nick.current_plan.should be_nil
     end
     
     it "returns current plan" do

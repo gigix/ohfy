@@ -1,3 +1,5 @@
+<%= render :partial => 'devise/shared/intro' %>
+
 <%
 	unless(devise_error_messages!().blank?) 
 		message("Please fill the grids marked RED correctly.".html_safe)
