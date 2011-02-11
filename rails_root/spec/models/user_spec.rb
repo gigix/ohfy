@@ -38,5 +38,10 @@ describe User do
       plan = @nick.create_plan!(Date.today - 2.days, ['Gym'])
       @nick.current_plan.should == plan
     end
+    
+    it "returns current plan if this plan starts from today" do
+      plan = @nick.create_plan!(Date.today, ['Gym'])
+      @nick.current_plan.should == plan
+    end
   end
 end

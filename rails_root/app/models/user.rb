@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   
   def current_plan
     active_plans.detect do |plan|
-      Date.today > plan.start_from and (Date.today - plan.start_from) < 30
+      Date.today >= plan.start_from and (Date.today - plan.start_from) < 30
     end
   end
 end
