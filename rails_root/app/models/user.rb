@@ -18,9 +18,12 @@ class User < ActiveRecord::Base
     
     from_date = Date.parse(from_date) if(from_date.is_a?(String))
     
-    self.active_plans.each {|plan| plan.abandon!}
+    plan = self.plans.build(:start_from => from_date)
 
-    plan = self.plans.create!(:start_from => from_date, :status => Plan::Status::ACTIVE)
+    self.active_plans.each {|plan| plan.abandon!} if plan.covers?(Date.today)
+
+    plan.status = Plan::Status::ACTIVE
+    plan.save!
     
     habit_names.each do |name|
       habit = plan.habits.create!(:title => name)
@@ -35,7 +38,7 @@ class User < ActiveRecord::Base
   
   def current_plan
     active_plans.detect do |plan|
-      Date.today >= plan.start_from and (Date.today - plan.start_from) < 30
+      plan.covers?(Date.today)
     end
-  end
+  end  
 end

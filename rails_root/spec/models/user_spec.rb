@@ -21,6 +21,13 @@ describe User do
       plan.executions.first.date.should == from_date
       plan.executions.last.date.should == from_date + 29.days
     end
+    
+    it "does not change current plan unless new plan covers today" do
+      current_plan = @nick.create_plan!(Date.yesterday, ['Drawing', 'Guitar', 'Gym'])
+      future_plan = @nick.create_plan!(Date.tomorrow, ['Swimming'])
+      
+      @nick.current_plan.should == current_plan
+    end
   end
   
   describe :current_plan do

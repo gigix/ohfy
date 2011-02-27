@@ -6,7 +6,7 @@ class Plan < ActiveRecord::Base
   after_create :create_executions
 
   def title
-    "Start from #{start_from}"
+    "From #{start_from} #{'(Current)' if self == user.current_plan}"
   end
   
   def execution_on(date)
@@ -26,10 +26,14 @@ class Plan < ActiveRecord::Base
     update_attribute(:status, Status::ABANDONED)
   end
   
+  def covers?(date)
+    date >= self.start_from and (date - self.start_from) < 30
+  end
+
   private
   def create_executions
     (0...30).each do |how_many|
       executions.create!(:date => start_from + how_many.days)
     end
-  end
+  end  
 end
