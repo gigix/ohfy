@@ -43,6 +43,15 @@ describe PlansController do
       user.current_plan.start_from.should == Date.yesterday
     end
     
+    it 'does not create habit with empty name' do
+      sign_in @user
+      
+      lambda do
+        post :create, :habits => ['Gym', '', '  '], :start_from => Date.yesterday.to_s(:db)
+        response.should redirect_to(root_path)
+      end.should change(Habit, :count).by(1)
+    end
+    
     it 'redirects back with error message if no habit inputted' do
       sign_in @user
       lambda do

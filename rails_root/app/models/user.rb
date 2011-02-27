@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
     plan.status = Plan::Status::ACTIVE
     plan.save!
     
-    habit_names.each do |name|
+    habit_names.reject(&:blank?).each do |name|
       habit = plan.habits.create!(:title => name)
     end
     

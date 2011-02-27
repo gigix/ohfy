@@ -258,6 +258,7 @@ ul.plans li {
 	width: 320px;
 	height: 234px;
 	margin-left: 30px;
+	margin-bottom: 20px;
 	background-image: url("/images/card_small.png");
 	float: left;
 }
