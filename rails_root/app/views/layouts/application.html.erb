@@ -12,7 +12,7 @@
 	<h1><%= link_to('1 Hour For Me', root_path) %></h1>
 	<div class="menu">
 		<% if user_signed_in? %>
-			Welcome, <%= link_to(current_user.email, edit_user_registration_path) %>
+			Welcome, <%= link_to(current_user.name, edit_user_registration_path) %>
 			&nbsp;&nbsp;|&nbsp;&nbsp;
 			<%= link_to('New Plan', new_plan_path) %>
 			&nbsp;&nbsp;|&nbsp;&nbsp;

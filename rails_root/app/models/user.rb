@@ -9,6 +9,10 @@ class User < ActiveRecord::Base
   
   has_many :plans
   
+  def name
+    self.email.split('@').first
+  end
+  
   def create_plan!(from_date, habit_names)    
     raise if habit_names.blank?
     
