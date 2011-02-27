@@ -11,4 +11,4 @@ task :spec do
 end
 
 Rake::Task[:default].prerequisites.clear
-task :default => %w(db:reset spec server:restart cucumber)
+task :default => %w(db:reset spec server:restart cucumber stats)

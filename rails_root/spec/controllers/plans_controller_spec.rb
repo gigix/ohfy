@@ -1,8 +1,25 @@
 require "#{File.dirname(__FILE__)}/../spec_helper"
 
 describe PlansController do
+  render_views
+  
   before(:each) do
     @user = create_test_user
+  end
+  
+  describe :index do
+    it 'redirects to sign-in page if no user signed in' do
+      get :index
+      response.should redirect_to(new_user_session_path)
+    end
+    
+    it 'renders with all plans of current user' do
+      user = create_user_with_plans
+      sign_in user
+      
+      get :index
+      response.should be_success
+    end
   end
   
   describe :create do

@@ -1,5 +1,9 @@
 class PlansController < ApplicationController
   before_filter :authenticate_user!
+
+  def index
+    
+  end
   
   def create
     current_user.create_plan!(params[:start_from], params[:habits])

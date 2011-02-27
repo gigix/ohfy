@@ -248,3 +248,26 @@ a:hover {
 #execution_sticker li.not_acted {
 	background-image: url("/images/big-button-not-acted.png");
 }
+
+ul.plans {
+	list-style: none;
+	color: #444444;
+}
+
+ul.plans li {
+	width: 320px;
+	height: 234px;
+	margin-left: 30px;
+	background-image: url("/images/card_small.png");
+	float: left;
+}
+
+ul.plans .plan_card {
+	margin-left: 20px;
+	font-size: 20px;
+}
+
+ul.plans .plan_card h4 {
+	padding-top: 10px;
+	margin-top: 0px;
+}

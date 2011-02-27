@@ -4,6 +4,10 @@ class Plan < ActiveRecord::Base
   has_many :executions
   
   after_create :create_executions
+
+  def title
+    "Start from #{start_from}"
+  end
   
   def execution_on(date)
     executions.detect{|execution| execution.date == date}
