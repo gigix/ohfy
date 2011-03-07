@@ -22,6 +22,10 @@ class Plan < ActiveRecord::Base
     status == Status::ACTIVE
   end
   
+  def removable?
+    executions.select(&:acted?).size < 3
+  end
+  
   def abandon!
     update_attribute(:status, Status::ABANDONED)
   end

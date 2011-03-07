@@ -28,7 +28,6 @@ class Execution < ActiveRecord::Base
   
   def status
     return Status::UNKNOWN if self.date > Date.today
-    acted_habits = self.habits.select{|habit| acted?(habit) }
     if acted_habits.blank?
       return self.date == Date.today ? Status::UNKNOWN : Status::BAD 
     end
@@ -40,7 +39,13 @@ class Execution < ActiveRecord::Base
     acted?(habit) ? 'acted' : 'not_acted'
   end
   
-  def acted?(habit)
+  def acted?(habit = nil)
+    return (not acted_habits.blank?) if habit.nil?
     not self.activities.find_by_habit_id(habit).blank?
+  end
+  
+  private
+  def acted_habits
+    habits.select{|habit| acted?(habit) }
   end
 end
