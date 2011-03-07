@@ -6,6 +6,9 @@
 				<% plan.habits.each do |habit| %>
 					<%= habit.summary %><br/>
 				<% end %>
+				<br/>
+				
+				<%= delete_button plan %>
 			</div>
 		</li>
 	<% end %>

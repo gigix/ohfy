@@ -22,6 +22,10 @@ describe PlansController do
     end
   end
   
+  describe :destroy do
+    it 'destroys specified plan'
+  end
+  
   describe :create do
     it 'redirects to sign-in page if no user signed in' do
       post :create

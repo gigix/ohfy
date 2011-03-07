@@ -145,7 +145,7 @@ a:hover {
 	font-size: 20px;
 }
 
-.sticker input[type="submit"] {
+input[type="submit"] {
 	font-family: fantasy;
 	font-size: 16px;
 	float: left;
@@ -271,4 +271,8 @@ ul.plans .plan_card {
 ul.plans .plan_card h4 {
 	padding-top: 10px;
 	margin-top: 0px;
+}
+
+ul.plans input[type="submit"] {
+	margin-left: 180px;
 }
