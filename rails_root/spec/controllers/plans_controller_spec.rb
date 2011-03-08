@@ -4,7 +4,7 @@ describe PlansController do
   render_views
   
   before(:each) do
-    @user = create_test_user
+    @user = create_user_with_plans
   end
   
   describe :index do
@@ -23,7 +23,42 @@ describe PlansController do
   end
   
   describe :destroy do
-    it 'destroys specified plan'
+    before(:each) do
+      sign_in @user
+    end
+    
+    it 'destroys specified plan and redirects to plans list page' do
+      lambda do
+        post :destroy, :id => @user.plans.first
+        response.should redirect_to(plans_path)
+      end.should change(Plan, :count).by(-1)
+    end
+    
+    it 'also destroys executions belong to specified plan' do
+      lambda do
+        post :destroy, :id => @user.plans.first
+      end.should change(Execution, :count).by(-30)
+    end
+    
+    it 'does not destroy plan not belong to current user' do
+      another_user = create_user_with_plans
+      lambda do
+        post :destroy, :id => another_user.plans.first
+        response.should redirect_to(plans_path)
+      end.should_not change(Plan, :count)
+    end
+    
+    it 'does not destroy plan which is not removable' do
+      plan = @user.current_plan
+      lambda do 
+        (0..2).each{|i| plan.executions[i].act!(plan.habits.first) }
+      end.should change(Activity, :count).by(3)
+      
+      lambda do
+        post :destroy, :id => plan
+        response.should redirect_to(plans_path)
+      end.should_not change(Plan, :count)
+    end
   end
   
   describe :create do
@@ -33,7 +68,7 @@ describe PlansController do
     end
     
     it 'creates plan' do
-      @user.current_plan.should be_nil
+      @user.current_plan.destroy
       sign_in @user
       
       lambda do

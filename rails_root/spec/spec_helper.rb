@@ -32,8 +32,8 @@ def create_test_user
 end
 
 def create_user_with_plans
-  user = User.create!(:email => 'user@test.com', :password => 'P@55w0rd')
+  user = User.create!(:email => "user_#{rand(Time.now.to_f)}@test.com", :password => 'P@55w0rd')
   user.create_plan!(Date.today - 32, ['Fiction'])
-  user.create_plan!(Date.yesterday, ['Drawing', 'Swimming'])
+  user.create_plan!(Date.today - 5, ['Drawing', 'Swimming'])
   user
 end

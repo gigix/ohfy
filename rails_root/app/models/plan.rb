@@ -1,7 +1,7 @@
 class Plan < ActiveRecord::Base
   belongs_to :user
   has_many :habits
-  has_many :executions
+  has_many :executions, :dependent => :destroy
   
   after_create :create_executions
 
@@ -39,5 +39,5 @@ class Plan < ActiveRecord::Base
     (0...30).each do |how_many|
       executions.create!(:date => start_from + how_many.days)
     end
-  end  
+  end    
 end
