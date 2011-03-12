@@ -41,7 +41,7 @@ class Execution < ActiveRecord::Base
   
   def acted?(habit = nil)
     return (not acted_habits.blank?) if habit.nil?
-    not self.activities.find_by_habit_id(habit).blank?
+    self.activities.detect{|activity| activity.habit == habit}
   end
   
   private
