@@ -231,13 +231,13 @@ input[type="submit"] {
 }
 
 #execution_sticker li {
-	width: 238px;
-	height: 66px;
+	width: 228px;
+	height: 61px;
 	background-image: url("/images/big-button.png");
 	margin-bottom: 10px;
-	padding-left: 10px;
-	padding-top: 5px;
-	font-size: 40px;
+	padding-left: 20px;
+	padding-top: 10px;
+	font-size: 20px;
 	font-style: bold;
 	cursor: pointer;
 }
@@ -272,6 +272,10 @@ ul.plans .plan_card {
 ul.plans .plan_card h4 {
 	padding-top: 10px;
 	margin-top: 0px;
+}
+
+ul.plans .plan_card h4 a {
+	color: black;
 }
 
 ul.plans input[type="submit"] {

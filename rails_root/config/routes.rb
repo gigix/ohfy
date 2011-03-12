@@ -1,5 +1,5 @@
 Ohfy::Application.routes.draw do
-  root :controller => :calendars, :action => :show
+  root :controller => :calendars, :action => :index
   
   devise_for :users
   

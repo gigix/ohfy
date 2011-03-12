@@ -4,6 +4,12 @@ class PlansController < ApplicationController
   def index
   end
   
+  def show
+    @plan = current_user.plans.find(params[:id])
+  rescue
+    redirect_to plans_path
+  end
+  
   def create
     current_user.create_plan!(params[:start_from], params[:habits])
     redirect_to root_path

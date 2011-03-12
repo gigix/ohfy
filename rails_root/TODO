@@ -8,6 +8,7 @@ Record execution of current day
 Widget
 Summarize plan
 Remove plan
+Review finished plan
 
 
 
@@ -16,8 +17,6 @@ Remove plan
 
 
 ===== Stories =====
-Change plan
-Select current plan
 Blog finished plan
 
 [Further]
@@ -26,6 +25,8 @@ Android client
 Community
 Color Themes
 
+Change plan
+Select current plan
 
 
 ===== Defects =====

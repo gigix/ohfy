@@ -109,4 +109,31 @@ describe PlansController do
       end.should_not change(Plan, :count)
     end
   end
+  
+  describe :show do
+    it "redirects to signin page if user is not signed in" do
+      get :show, :id => 1
+      response.should be_redirect
+    end
+    
+    describe 'with user signed in' do
+      before(:each) do
+        @user = create_user_with_plans
+        sign_in @user
+      end
+      
+      it "renders with specified plan" do
+        plan = @user.plans.first
+        get :show, :id => plan.id
+        response.should be_success
+        assigns[:plan].should == plan
+      end
+      
+      it "does not allow accessing plan belongs to other user" do
+        plan = create_user_with_plans.plans.first
+        get :show, :id => plan.id
+        response.should redirect_to(plans_path)
+      end
+    end
+  end
 end

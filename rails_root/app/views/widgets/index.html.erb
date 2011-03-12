@@ -4,4 +4,11 @@
 
 <div style="clear:both; height: 30px"></div>
 
-<%= %(<script src="#{full_asset_path(widget_path(user))}"></script>) %>
+<h3>How to embed this widget into my blog?</h3>
+Please copy the following HTML snippet and paste it into your blog template:<br/>
+<input id='widget_snippet' size='60' value='<%= %(<script src="#{full_asset_path(widget_path(user))}"></script>) %>' />
+
+<script>
+	$('widget_snippet').focus();
+	$('widget_snippet').select();
+</script>

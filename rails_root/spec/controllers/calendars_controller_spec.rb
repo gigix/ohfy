@@ -3,9 +3,9 @@ require "#{File.dirname(__FILE__)}/../spec_helper"
 describe CalendarsController do
   render_views
   
-  describe :show do    
+  describe :index do    
     it "redirects to signin page if user is not signed in" do
-      get :show
+      get :index
       response.should be_redirect
     end
     
@@ -15,13 +15,13 @@ describe CalendarsController do
         sign_in @user
       end
       
-      it "renders if user signed in" do
-        get :show
+      it "renders" do
+        get :index
         response.should be_success
       end
     
       it "shows user name instead of email" do
-        get :show
+        get :index
         response.body.should =~ /#{@user.name}/
         response.body.should_not =~ /#{@user.email}/
       end

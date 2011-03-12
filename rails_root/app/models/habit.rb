@@ -4,8 +4,13 @@ class Habit < ActiveRecord::Base
   
   def summary
     days = acted_days
-    "#{title} (#{days} #{days <= 1 ? 'day' : 'days'})"
+    "#{short_title} (#{days} #{days <= 1 ? 'day' : 'days'})"
   end  
+  
+  def short_title
+    return title unless title.length > 20
+    title[0...20] + "..."
+  end
   
   private
   def acted_days

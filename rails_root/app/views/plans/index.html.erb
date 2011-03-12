@@ -2,7 +2,7 @@
 	<% current_user.plans.each do |plan| %>
 		<li>
 			<div class="plan_card">
-				<h4><%= plan.title %></h4>
+				<h4><%= link_to plan.title, plan_path(plan) %></h4>
 				<% plan.habits.each do |habit| %>
 					<%= habit.summary %><br/>
 				<% end %>

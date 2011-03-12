@@ -5,7 +5,7 @@
 		onclick="<%= remote_function(
 		:update => 'execution_detail', 
         :url => (url_for :controller => :activities, :action => :toggle, :execution_id => execution, :habit_id => habit )) %>">
-		<%= habit.title %>
+		<%= habit.short_title %>
 	</li>
 	<% end %>
 </ul>
