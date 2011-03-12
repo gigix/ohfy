@@ -14,6 +14,7 @@ class User < ActiveRecord::Base
   end
   
   def create_plan!(from_date, habit_names)    
+    habit_names.reject!(&:blank?)
     raise if habit_names.blank?
     
     from_date = Date.parse(from_date) if(from_date.is_a?(String))
@@ -25,7 +26,7 @@ class User < ActiveRecord::Base
     plan.status = Plan::Status::ACTIVE
     plan.save!
     
-    habit_names.reject(&:blank?).each do |name|
+    habit_names.each do |name|
       habit = plan.habits.create!(:title => name)
     end
     

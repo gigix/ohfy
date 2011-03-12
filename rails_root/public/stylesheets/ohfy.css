@@ -127,6 +127,12 @@ a:hover {
 	margin-bottom: 5px;
 }
 
+.sticker h3 {
+	margin-top: 20px;
+	margin-bottom: 5px;
+	font-size: 20px;
+}
+
 .sticker a {
 	color: #000000;
 }

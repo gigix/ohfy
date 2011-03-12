@@ -94,7 +94,7 @@ describe PlansController do
     it 'redirects back with error message if no habit inputted' do
       sign_in @user
       lambda do
-        post :create, :habits => [], :start_from => Date.yesterday.to_s(:db)
+        post :create, :habits => ['', '', ''], :start_from => Date.yesterday.to_s(:db)
         response.should redirect_to(root_path)
         flash[:alert].should_not be_blank
       end.should_not change(Plan, :count)
