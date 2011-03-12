@@ -57,13 +57,13 @@ a:hover {
 }
 
 .ohfy_calendar .date {
-	font-size: 25px;
+	font-size: 25px;	
 	text-align: center;
+	text-shadow: 0 0 5px #000000;
 	vertical-align: middle;
 	float: left;
 	height: 94px;
 	width: 103px;
-	margin-left: 5px;
 }
 
 .ohfy_calendar .date.actable {
@@ -190,6 +190,7 @@ input[type="submit"] {
 	position: absolute;
 	top: 25%;
 	left: 35%;
+	text-shadow: 0 0 5px black;
 }
 
 #execution_sticker.unknown {
@@ -197,7 +198,7 @@ input[type="submit"] {
 }
 
 #execution_sticker.bad {
-	background-image: url("/images/big-grid-bad.png");
+	background-image: url("/images/big-grid-unknown.png");
 }
 
 #execution_sticker.good {
