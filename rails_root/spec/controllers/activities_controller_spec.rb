@@ -18,7 +18,7 @@ describe ActivitiesController do
         response.should be_success
       end.should change(Activity, :count).by(1)
       
-      execution.status_of(habit).should == 'acted'
+      execution.reload.status_of(habit).should == 'acted'
     end
     
     it 'de-acts on given execution and habit if current status is acted' do
@@ -31,7 +31,7 @@ describe ActivitiesController do
         response.should be_success
       end.should change(Activity, :count).by(-1)
       
-      execution.status_of(habit).should == 'not_acted'
+      execution.reload.status_of(habit).should == 'not_acted'
     end
   end
 end
