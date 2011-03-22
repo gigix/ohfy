@@ -133,6 +133,11 @@ a:hover {
 	font-size: 20px;
 }
 
+.sticker h4 {
+	margin-top: 10px;
+	margin-bottom: 0px;
+}
+
 .sticker a {
 	color: #000000;
 }
