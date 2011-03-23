@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
     
     plan = self.plans.build(:start_from => from_date)
 
-    self.active_plans.each {|plan| plan.abandon!} if plan.covers?(Date.today)
+    self.active_plans.each {|plan| plan.abandon!} if covered_by?(plan)
 
     plan.status = Plan::Status::ACTIVE
     plan.save!
@@ -39,7 +39,24 @@ class User < ActiveRecord::Base
   
   def current_plan
     active_plans.detect do |plan|
-      plan.covers?(Date.today)
+      covered_by?(plan)
     end
-  end  
+  end 
+  
+  def time_zone
+    ActiveSupport::TimeZone.new(time_zone_name)
+  end 
+  
+  def today
+    time_zone.utc_to_local(Time.now).to_date
+  end
+  
+  def execution_on_today
+    current_plan.execution_on(today)
+  end
+  
+  private
+  def covered_by?(plan)
+    plan.covers?(today)
+  end
 end

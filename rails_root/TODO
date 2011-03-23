@@ -9,11 +9,12 @@ Widget
 Summarize plan
 Remove plan
 Review finished plan
+timezone: fixed
 
 
 
 ===== Doing =====
-
+Allow user choose/change timezone
 
 
 ===== Stories =====
@@ -30,7 +31,6 @@ Select current plan
 
 
 ===== Defects =====
-timezone
 
 
 
