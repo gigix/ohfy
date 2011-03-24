@@ -1,4 +1,4 @@
-class InsertTestData < ActiveRecord::Migration
+class InsertTestUsersAndPlans < ActiveRecord::Migration
   def self.up
     return if RAILS_ENV == 'production'
     
