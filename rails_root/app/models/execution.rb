@@ -13,6 +13,7 @@ class Execution < ActiveRecord::Base
   
   def deact!(habit)
     self.activities.find_all_by_habit_id(habit.id).each{|activity| activity.destroy }
+    self.reload
   end
   
   class Status
