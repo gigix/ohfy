@@ -48,7 +48,7 @@ class User < ActiveRecord::Base
   end 
   
   def today
-    time_zone.utc_to_local(Time.now).to_date
+    time_zone.utc_to_local(Time.zone.now).to_date
   end
   
   def execution_on_today
