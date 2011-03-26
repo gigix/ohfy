@@ -57,6 +57,6 @@ class User < ActiveRecord::Base
   
   private
   def covered_by?(plan)
-    plan.covers?(Date.today)
+    plan.covers?(today)
   end
 end

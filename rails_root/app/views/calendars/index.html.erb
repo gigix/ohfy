@@ -1,5 +1,5 @@
 <% if current_user.current_plan %>
-	<% execution_on_today = current_user.current_plan.execution_on(Date.today) %>
+	<% execution_on_today = current_user.execution_on_today %>
 	<%= draw_plan(current_user.current_plan) %>
 	
 	<script>

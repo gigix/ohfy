@@ -9,6 +9,10 @@ class Plan < ActiveRecord::Base
     "From #{start_from} #{'(Current)' if self == user.current_plan}"
   end
   
+  def today
+    user.today
+  end
+  
   def execution_on(date)
     executions.detect{|execution| execution.date == date}
   end

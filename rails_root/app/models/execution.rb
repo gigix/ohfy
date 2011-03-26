@@ -4,7 +4,7 @@ class Execution < ActiveRecord::Base
   has_many :habits, :through => :plan
 
   def actable?
-    self.date == Date.today or self.date == Date.today - 1
+    self.date == plan.today or self.date == plan.today - 1
   end
   
   def act!(habit)
@@ -28,9 +28,9 @@ class Execution < ActiveRecord::Base
   end
   
   def status
-    return Status::UNKNOWN if self.date > Date.today
+    return Status::UNKNOWN if self.date > plan.today
     if acted_habits.blank?
-      return self.date == Date.today ? Status::UNKNOWN : Status::BAD 
+      return self.date == plan.today ? Status::UNKNOWN : Status::BAD 
     end
     return Status::GREAT if acted_habits.size == self.habits.size
     return Status::GOOD
