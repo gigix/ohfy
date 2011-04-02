@@ -2,7 +2,6 @@
 
 <div class='sticker'>
 	<div class='content'>
-		<h4><%= User.count %> people here have their daily plans</h4>
 		<h2>Let me in ...</h2>
 
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
@@ -20,7 +19,7 @@
 				<%= f.submit "Sign in" %>
 				
 				<div class="link_after_button">
-					<%= link_to "Forgot your password?", new_password_path(resource_name) %>
+					<%= link_to "New comer? JOIN US NOW!", new_registration_path(resource_name) %>
 				</div>
 			</p>
 		<% end %>
