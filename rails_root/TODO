@@ -10,14 +10,14 @@ Summarize plan
 Remove plan
 Review finished plan
 timezone: fixed
+Support IE/Firefox@Windows
 
 
 
 ===== Doing =====
-Allow user choose/change timezone
-
 
 ===== Stories =====
+Allow user choose/change timezone
 Share execution to SNS
 Blog finished plan
 

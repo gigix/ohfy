@@ -1,14 +1,19 @@
 <h3><%= execution.date.to_s %></h3>
-<ul>
-	<% execution.habits.each do |habit| %>
-	<li class='<%= execution.status_of(habit) %>'
-		onclick="<%= remote_function(
-		:update => 'execution_detail', 
-        :url => (url_for :controller => :activities, :action => :toggle, :execution_id => execution, :habit_id => habit )) %>">
-		<%= habit.short_title %>
-	</li>
-	<% end %>
-</ul>
+<div class='activity_buttons'>
+	<ul>
+		<% execution.habits.each do |habit| %>
+		<li class='<%= execution.status_of(habit) %>'
+			onclick="<%= remote_function(
+			:update => 'execution_detail', 
+	        :url => (url_for :controller => :activities, :action => :toggle, :execution_id => execution, :habit_id => habit )) %>">
+			<%= habit.short_title %>
+		</li>
+		<% end %>
+	</ul>
+</div>
+<div class="share_buttons">
+
+</div>
 
 <script>
 	showExecutionDetail('<%= execution.status %>')

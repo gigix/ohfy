@@ -1,7 +1,12 @@
 <%= render :partial => 'devise/shared/intro' %>
 
 <div class='sticker'>
-	<div class='content'>
+	<div class='content' id='noscript'>
+		<h2>Sorry, we can't serve you!</h2>
+		<p>JavaScript is turned off in your web browser. 
+		Turn it on to take full advantage of this site, then refresh the page.</p>
+	</div>
+	<div class='content' id='signin_form' style='display:none;'>
 		<h2>Let me in ...</h2>
 
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
@@ -23,6 +28,10 @@
 				</div>
 			</p>
 		<% end %>
-
 	</div>
 </div>
+
+<script>
+	$('noscript').hide();
+	$('signin_form').show();
+</script>

@@ -145,6 +145,7 @@ a:hover {
 .sticker .content {
 	margin-top: 35px;
 	margin-left: 40px;
+	margin-right: 35px;
 }
 
 .sticker input[type="text"], .sticker input[type="password"] {
@@ -259,6 +260,15 @@ input[type="submit"] {
 
 #execution_sticker li.not_acted {
 	background-image: url("/images/big-button-not-acted.png");
+}
+
+.activity_buttons {
+	float: left;
+}
+
+.share_buttons {
+	overflow: hidden;
+	width: 48px;
 }
 
 ul.plans {
