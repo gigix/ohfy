@@ -16,7 +16,9 @@
 </div>
 
 <script>
+	<% unless defined?(hide_sticker) and hide_sticker %>
 	showExecutionDetail('<%= execution.status %>')
+	<% end %>
 	
 	var smallSticker = $('execution-<%= execution.date %>')
 	setStatusClass(smallSticker, '<%= execution.status %>')

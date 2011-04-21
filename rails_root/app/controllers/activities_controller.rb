@@ -2,7 +2,7 @@ class ActivitiesController < ApplicationController
   before_filter :authenticate_user!
   
   def toggle
-    @execution = current_user.current_plan.executions.find(params[:execution_id])
+    @execution = current_user.executions.find(params[:execution_id])
     habit = @execution.habits.find(params[:habit_id])
     
     unless @execution.acted?(habit)

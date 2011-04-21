@@ -1,38 +1,5 @@
-<% if current_user.current_plan %>
-	<% execution_on_today = current_user.execution_on_today %>
-	<%= draw_plan(current_user.current_plan) %>
-	
-	<script>
-		function setStatusClass(element, status) {
-			<%= Execution::Status.list.inspect.html_safe %>.each(function(classname) {
-				element.removeClassName(classname)
-			})
-			element.addClassName(status)
-		}
-	
-		function showExecutionDetail(status) {
-			var detailSticker = $('execution_sticker')
-			setStatusClass(detailSticker, status)
-
-			if(!detailSticker.visible()) {
-				detailSticker.appear()
-			}
-		}
-		
-		function hideExecutionDetail() {
-			var detailSticker = $('execution_sticker')
-			if(detailSticker.visible()) {
-				detailSticker.fade()
-			}
-		}		
-	</script>
-	
-	<div id="execution_sticker">
-		<div class="close_button" onclick='hideExecutionDetail()'></div>
-		<div id="execution_detail">
-			<%= render :partial => 'executions/execution', :object => execution_on_today %>
-		</div>
-	</div>
+<% if current_plan %>
+	<%= render :partial => 'plans/plan', :object => current_plan %>
 <% else %>
 	<%= render :partial => 'plans/form' %>
 <% end %>

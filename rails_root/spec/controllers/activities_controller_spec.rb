@@ -33,5 +33,16 @@ describe ActivitiesController do
       
       assigns[:execution].status_of(habit).should == 'not_acted'
     end
+    
+    it 'allows toggling executions does not belong to current plan' do
+      execution = @plan.execution_on(Date.yesterday)
+      @user.create_plan!(Date.today, ['Gym', 'Drawing', 'Guitar'])
+      execution.plan.should_not == @user.current_plan
+      
+      lambda do
+        post :toggle, :execution_id => execution, :habit_id => @plan.habits.first
+        response.should be_success
+      end.should change(Activity, :count).by(1)
+    end
   end
 end

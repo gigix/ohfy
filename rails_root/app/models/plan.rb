@@ -17,6 +17,10 @@ class Plan < ActiveRecord::Base
     executions.detect{|execution| execution.date == date}
   end
   
+  def execution_on_today
+    execution_on(today)
+  end
+  
   class Status
     ACTIVE = 'active'
     ABANDONED = 'abandoned'
