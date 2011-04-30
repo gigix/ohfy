@@ -12,11 +12,11 @@ Review finished plan
 timezone: fixed
 Support IE/Firefox@Windows
 Execute on yesterday even it belongs to finished plan
+Clone an existing plan
 
 
 
 ===== Doing =====
-Clone an existing plan
 
 ===== Stories =====
 Allow user choose/change timezone

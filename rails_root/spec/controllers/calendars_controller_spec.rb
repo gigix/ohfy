@@ -15,12 +15,19 @@ describe CalendarsController do
         sign_in @user
       end
       
+      it "redirects to 'new plan' page if user doesn't have one" do
+        get :index
+        response.should redirect_to(new_plan_path)
+      end
+    
       it "renders" do
+        @user.create_plan!(Date.yesterday, ['Gym'])
         get :index
         response.should be_success
       end
-    
+      
       it "shows user name instead of email" do
+        @user.create_plan!(Date.yesterday, ['Gym'])
         get :index
         response.body.should =~ /#{@user.name}/
         response.body.should_not =~ /#{@user.email}/

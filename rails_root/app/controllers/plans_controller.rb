@@ -4,6 +4,14 @@ class PlansController < ApplicationController
   def index
   end
   
+  def new
+    if(params[:clone])
+      @plan = current_user.plans.find(params[:clone]).duplicate
+    else
+      @plan = current_user.plans.build(:start_from => current_user.today)
+    end
+  end
+  
   def show
     @plan = current_user.plans.find(params[:id])
   rescue

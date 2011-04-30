@@ -295,8 +295,13 @@ ul.plans .plan_card h4 {
 	margin-top: 0px;
 }
 
-ul.plans .plan_card h4 a {
+ul.plans .plan_card a {
 	color: black;
+}
+
+ul.plans .plan_card form {
+	float: left;
+	width: 60px;
 }
 
 ul.plans input[type="submit"] {

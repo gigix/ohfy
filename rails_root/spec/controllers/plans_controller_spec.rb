@@ -7,6 +7,33 @@ describe PlansController do
     @user = create_user_with_plans
   end
   
+  describe :new do
+    before(:each) do
+      sign_in @user
+    end
+    
+    it "renders 'new plan' form with unsaved new plan" do
+      lambda do
+        get :new
+      end.should_not change(Plan, :count)
+      
+      response.should be_success
+      assigns[:plan].should_not be_nil
+    end
+    
+    it "renders 'new plan' form with given plan" do
+      lambda do 
+        get :new, :clone => @user.current_plan.id
+        response.should be_success
+      end.should_not change(Plan, :count)
+            
+      new_plan = assigns[:plan]
+      new_plan.habits.should == @user.current_plan.habits
+      new_plan.start_from.should_not == @user.current_plan.start_from
+      new_plan.start_from.should == @user.today
+    end
+  end
+  
   describe :index do
     it 'redirects to sign-in page if no user signed in' do
       get :index

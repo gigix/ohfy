@@ -26,4 +26,15 @@ describe Plan do
       @plan.should_not be_removable
     end
   end
+  
+  describe :duplicate do
+    it "creates a new unsaved plan with same habits and starts from today" do
+      lambda do
+        new_plan = @plan.duplicate
+        new_plan.habits.should == @plan.habits
+        new_plan.start_from.should_not == @plan.start_from
+        new_plan.start_from.should == @user.today
+      end.should_not change(Plan, :count)
+    end
+  end
 end

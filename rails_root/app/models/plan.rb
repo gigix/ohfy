@@ -21,6 +21,10 @@ class Plan < ActiveRecord::Base
     execution_on(today)
   end
   
+  def duplicate
+    user.plans.build(:habits => self.habits, :start_from => today)
+  end
+  
   class Status
     ACTIVE = 'active'
     ABANDONED = 'abandoned'

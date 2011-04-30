@@ -7,7 +7,7 @@
 					<%= habit.summary %><br/>
 				<% end %>
 				<br/>
-				
+				<%= link_to "Clone Plan", :action => 'new', :clone => plan %>
 				<%= delete_button plan %>
 			</div>
 		</li>

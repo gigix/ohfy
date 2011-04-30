@@ -4,20 +4,20 @@
 		<%= form_tag(plans_path, :method => :post) do -%>
 			<div class='row'>
 				<div class='column_left'>&nbsp;</div>
-				<div class='column_right'><%= text_field_tag 'habits[]' %></div>
+				<div class='column_right'><%= text_field_tag 'habits[]', habit_title(@plan, 0) %></div>
 			</div>
 			<div class='row'>
 				<div class='column_left'>and </div>
-				<div class='column_right'><%= text_field_tag 'habits[]' %></div>
+				<div class='column_right'><%= text_field_tag 'habits[]', habit_title(@plan, 1) %></div>
 			</div>
 			<div class='row'>
 				<div class='column_left'>and </div>
-				<div class='column_right'><%= text_field_tag 'habits[]' %></div>
+				<div class='column_right'><%= text_field_tag 'habits[]', habit_title(@plan, 2) %></div>
 			</div>
 			<h3>in a month starts from ...</h3>
 			<div class='row'>
 				<div class='column_left fyi'>&nbsp;</div>
-				<div class='column_right'><%= text_field_tag 'start_from', current_user.today.to_s %></div>
+				<div class='column_right'><%= text_field_tag 'start_from', @plan.start_from.to_s %></div>
 			</div>
 			<div class='row'>
 				<div class='column_left'>&nbsp;</div>
