@@ -11,10 +11,10 @@
 
 		<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 		  <p><%= f.label :email %><br />
-		  <%= f.text_field :email, :size => 25 %></p>
+		  <%= f.text_field :email, :size => 20 %></p>
 
 		  <p><%= f.label :password %><br />
-		  <%= f.password_field :password, :size => 25 %></p>
+		  <%= f.password_field :password, :size => 20 %></p>
 
 		  <% if devise_mapping.rememberable? -%>
 		    <p><%= f.check_box :remember_me %> <%= f.label :remember_me %></p>
