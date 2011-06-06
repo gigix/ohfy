@@ -12,8 +12,9 @@
 	</ul>
 </div>
 <div class="share_buttons">
-	<div class="twitter button"><%= render :partial => 'executions/share_to_twitter', :locals => {:execution => execution} %></div>
-	<div class="fanfou button"><%= render :partial => 'executions/share_to_fanfou', :locals => {:execution => execution} %></div>
+	<span class="twitter button"><%= render :partial => 'executions/share_to_twitter', :locals => {:execution => execution} %></span>
+	<span class="sina button"><%= render :partial => 'executions/share_to_sina', :locals => {:execution => execution} %></span>
+	<span class="fanfou button"><%= render :partial => 'executions/share_to_fanfou', :locals => {:execution => execution} %></span>
 </div>
 
 <script>
