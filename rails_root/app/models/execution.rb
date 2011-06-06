@@ -3,6 +3,13 @@ class Execution < ActiveRecord::Base
   has_many :activities
   has_many :habits, :through => :plan
 
+  def description
+    date_str = "#{date.to_s(:db)}: "
+    activities.blank? ? 
+      date_str + "did nothing." :
+      date_str + activities.map{|activity| activity.habit.title}.join("; ") + "."
+  end
+
   def actable?
     self.date == plan.today or self.date == plan.today - 1
   end

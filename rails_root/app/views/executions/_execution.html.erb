@@ -4,7 +4,7 @@
 		<% execution.habits.each do |habit| %>
 		<li class='<%= execution.status_of(habit) %>'
 			onclick="<%= remote_function(
-			:update => 'execution_detail', 
+			:success => 'window.location.reload()', 
 	        :url => (url_for :controller => :activities, :action => :toggle, :execution_id => execution, :habit_id => habit )) %>">
 			<%= habit.short_title %>
 		</li>
@@ -12,7 +12,7 @@
 	</ul>
 </div>
 <div class="share_buttons">
-
+	<%= render :partial => 'executions/share_to_twitter', :locals => {:execution => execution} %>
 </div>
 
 <script>

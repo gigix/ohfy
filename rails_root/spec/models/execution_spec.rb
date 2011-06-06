@@ -6,6 +6,24 @@ describe Execution do
     @plan = @user.create_plan!((Date.today - 3), ['Drawing', 'Guitar', 'Gym'])
   end
   
+  describe :description do
+    it "returns a readable description of today's execution" do
+      date = Date.today - 3
+      execution = @plan.execution_on(date)
+      
+      execution.description.should == "#{date.to_s(:db)}: did nothing."
+      
+      execution.act!(execution.habits.first)
+      execution.description.should == "#{date.to_s(:db)}: Drawing."
+      
+      execution.act!(execution.habits.second)
+      execution.description.should == "#{date.to_s(:db)}: Drawing; Guitar."
+      
+      execution.act!(execution.habits.last)
+      execution.description.should == "#{date.to_s(:db)}: Drawing; Guitar; Gym."
+    end
+  end
+  
   describe :status do
     it "returns GREAT if all habits are acted" do
       date = Date.today - 3

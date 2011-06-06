@@ -239,7 +239,7 @@ input[type="submit"] {
 
 #execution_sticker ul {
 	margin-top: 10px;
-	margin-left: 30px;
+	margin-left: 0px;
 	list-style: none;
 }
 
@@ -269,7 +269,9 @@ input[type="submit"] {
 
 .share_buttons {
 	overflow: hidden;
-	width: 48px;
+	width: 55px;
+	padding-left: 20px;
+	margin-top: 220px;
 }
 
 ul.plans {
