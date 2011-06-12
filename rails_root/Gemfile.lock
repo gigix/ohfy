@@ -82,6 +82,8 @@ GEM
       gem_plugin (~> 0.2.3)
     newrelic_rpm (2.13.4)
     nokogiri (1.4.4)
+    oauth (0.4.4)
+    oauth_china (0.3.0)
     polyglot (0.3.1)
     rack (1.2.1)
     rack-mount (0.6.13)
@@ -143,6 +145,8 @@ DEPENDENCIES
   gizmo
   mongrel
   newrelic_rpm
+  oauth
+  oauth_china
   rails (= 3.0.3)
   rspec
   rspec-rails

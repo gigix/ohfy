@@ -3,3 +3,6 @@ db/*.sqlite3
 db/backup
 log/*.log
 tmp/**/*
+
+config/oauth/sina_oauth.config
+config/oauth/sina.yml

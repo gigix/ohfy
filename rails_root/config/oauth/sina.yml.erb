@@ -1,0 +1,15 @@
+<%
+    key, secret = File.open(File.join(Rails.root, "config", "oauth", "sina_oauth.config")){|f| f.read}.split(":").map(&:strip)
+%>
+development: &development
+   key:    "<%= key %>"
+   secret: "<%= secret %>"
+   url:    "http://1.HourFor.me"
+   callback: "http://localhost:3000/your_callback_url"
+
+test:
+   <<: *development
+
+production:
+   <<: *development
+   callback: "http://localhost:3000/your_callback_url"
