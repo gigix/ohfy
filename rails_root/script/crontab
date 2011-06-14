@@ -1,2 +1,2 @@
 MAILTO=gigix1980@gmail.com
-* * * * * cd /home/ohfy/ohfy/rails_root && /home/ohfy/.gems/bin/bundle exec rails runner -e production script/share.rb
+* * * * * bash -c "cd /home/ohfy/ohfy/rails_root && /home/ohfy/.gems/bin/bundle exec rails runner -e production script/share.rb"
