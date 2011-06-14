@@ -28,7 +28,9 @@ class PlansController < ApplicationController
     else
       redirect_to root_path
     end
-  rescue
+  rescue => e
+    logger.info e.message
+    logger.info e.backtrace.join("\n")
     flash[:alert] = "You need input at least ONE habit, as well as a valid start date (YYYY-mm-dd)."
     redirect_to new_plan_path
   end
