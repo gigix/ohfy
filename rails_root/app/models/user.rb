@@ -14,13 +14,13 @@ class User < ActiveRecord::Base
     self.email.split('@').first
   end
   
-  def create_plan!(from_date, habit_names)    
+  def create_plan!(from_date, habit_names, share_to_sina = false)    
     habit_names.reject!(&:blank?)
     raise if habit_names.blank?
     
     from_date = Date.parse(from_date) if(from_date.is_a?(String))
     
-    plan = self.plans.build(:start_from => from_date)
+    plan = self.plans.build(:start_from => from_date, :share_to_sina => share_to_sina)
 
     self.active_plans.each {|plan| plan.abandon!} if covered_by?(plan)
 
@@ -47,6 +47,18 @@ class User < ActiveRecord::Base
   def time_zone
     ActiveSupport::TimeZone.new(time_zone_name)
   end 
+  
+  def sina_oauth_client
+    if(sina_oauth_client_dump.blank?)
+      return OauthChina::Sina.new
+    else
+      return OauthChina::Sina.load(eval(sina_oauth_client_dump))
+    end
+  end
+  
+  def set_sina_oauth_client!(client)
+    update_attribute(:sina_oauth_client_dump, client.dump.inspect)
+  end
   
   def today
     time_zone.utc_to_local(Time.zone.now).to_date

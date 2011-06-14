@@ -193,6 +193,10 @@ input[type="submit"] {
 	padding-top: 10px;
 }
 
+.sticker .row .column_left.share_button {
+	width: 50%;
+}
+
 .sticker .row .column_right {
 
 }

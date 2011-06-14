@@ -19,11 +19,18 @@ class PlansController < ApplicationController
   end
   
   def create
-    current_user.create_plan!(params[:start_from], params[:habits])
-    redirect_to root_path
+    new_plan = current_user.create_plan!(params[:start_from], params[:habits], params[:share_to_sina])
+    if(new_plan.share_to_sina? and current_user.sina_oauth_client_dump.blank?)
+      oauth_client = current_user.sina_oauth_client
+      authorize_url = oauth_client.authorize_url
+      current_user.set_sina_oauth_client!(oauth_client)
+      redirect_to authorize_url
+    else
+      redirect_to root_path
+    end
   rescue
     flash[:alert] = "You need input at least ONE habit, as well as a valid start date (YYYY-mm-dd)."
-    redirect_to root_path
+    redirect_to new_plan_path
   end
   
   def destroy

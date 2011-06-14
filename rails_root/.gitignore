@@ -6,3 +6,4 @@ tmp/**/*
 
 config/oauth/sina_oauth.config
 config/oauth/sina.yml
+script/client_dump

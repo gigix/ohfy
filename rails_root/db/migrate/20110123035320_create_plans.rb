@@ -6,6 +6,8 @@ class CreatePlans < ActiveRecord::Migration
       t.date :start_from
       t.string :status, :default => Plan::Status::ACTIVE
       
+      t.boolean :share_to_sina
+      
       t.timestamps
     end
   end

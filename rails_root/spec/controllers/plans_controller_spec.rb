@@ -101,12 +101,25 @@ describe PlansController do
       lambda do
         post :create, :habits => ['Gym', 'Drawing', 'Guitar'], :start_from => Date.yesterday.to_s(:db)
         response.should redirect_to(root_path)
+        flash[:alert].should be_blank
       end.should change(Plan, :count).by(1)
 
       user = User.find(@user.id)
       user.current_plan.should_not be_nil
       user.current_plan.should have(3).habits
       user.current_plan.start_from.should == Date.yesterday
+      user.current_plan.should_not be_share_to_sina
+    end
+    
+    it 'redirects to sina authorize url if necessary' do
+      @user.current_plan.destroy
+      sign_in @user
+      
+      post :create, :habits => ['Gym', 'Drawing', 'Guitar'], :start_from => Date.yesterday.to_s(:db), :share_to_sina => '1'
+      response.should_not redirect_to(root_path)
+
+      user = User.find(@user.id)
+      user.current_plan.should be_share_to_sina      
     end
     
     it 'does not create habit with empty name' do
@@ -115,6 +128,7 @@ describe PlansController do
       lambda do
         post :create, :habits => ['Gym', '', '  '], :start_from => Date.yesterday.to_s(:db)
         response.should redirect_to(root_path)
+        flash[:alert].should be_blank
       end.should change(Habit, :count).by(1)
     end
     
@@ -122,7 +136,7 @@ describe PlansController do
       sign_in @user
       lambda do
         post :create, :habits => ['', '', ''], :start_from => Date.yesterday.to_s(:db)
-        response.should redirect_to(root_path)
+        response.should redirect_to(new_plan_path)
         flash[:alert].should_not be_blank
       end.should_not change(Plan, :count)
     end
@@ -131,7 +145,7 @@ describe PlansController do
       sign_in @user
       lambda do
         post :create, :habits => ['Gym'], :start_from => 'blah blah'
-        response.should redirect_to(root_path)
+        response.should redirect_to(new_plan_path)
         flash[:alert].should_not be_blank
       end.should_not change(Plan, :count)
     end

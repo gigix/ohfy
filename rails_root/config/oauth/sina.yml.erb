@@ -5,11 +5,11 @@ development: &development
    key:    "<%= key %>"
    secret: "<%= secret %>"
    url:    "http://1.HourFor.me"
-   callback: "http://localhost:3000/your_callback_url"
+   callback: "http://localhost:3000/callbacks/sina"
 
 test:
    <<: *development
 
 production:
    <<: *development
-   callback: "http://localhost:3000/your_callback_url"
+   callback: "http://1.HourFor.me/callbacks/sina"

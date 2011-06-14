@@ -10,6 +10,8 @@ Ohfy::Application.routes.draw do
     resources :activities
   end
   
+  match 'callbacks/sina', :controller => :callbacks, :action => :sina
+  
   resources :widgets
   match 'widgets-style/ohfy-widget.css', :controller => :widgets, :action => :css
   

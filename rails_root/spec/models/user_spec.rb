@@ -66,4 +66,17 @@ describe User do
       @nick.execution_on_today.date.should == @nick.today
     end
   end
+  
+  describe :sina_oauth_client do
+    it "returns new sina oauth client if there's no one exists" do
+      @nick.sina_oauth_client_dump.should be_nil
+      @nick.sina_oauth_client.should_not be_nil
+    end
+    
+    it "returns sina oauth client loaded from database" do
+      client = OauthChina::Sina.new
+      @nick.set_sina_oauth_client!(client)
+      @nick.sina_oauth_client.dump.should == client.dump
+    end
+  end
 end

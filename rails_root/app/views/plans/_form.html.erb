@@ -20,7 +20,10 @@
 				<div class='column_right'><%= text_field_tag 'start_from', @plan.start_from.to_s %></div>
 			</div>
 			<div class='row'>
-				<div class='column_left'>&nbsp;</div>
+				<div class='column_left share_button'>
+					<%= check_box_tag 'share_to_sina' %>
+					<%= label_tag 'share_to_sina', 'Share to Sina Weibo' %>
+				</div>
 				<div class='column_right' style='padding-left: 230px; padding-top: 10px'><%= submit_tag "That's it!" %></div>
 			</div>
 		<% end -%>
