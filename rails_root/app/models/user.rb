@@ -60,12 +60,24 @@ class User < ActiveRecord::Base
     update_attribute(:sina_oauth_client_dump, client.dump.inspect)
   end
   
+  def sina_ready?
+    not sina_oauth_client_dump.blank?
+  end
+  
   def today
     time_zone.utc_to_local(Time.zone.now).to_date
   end
   
   def execution_on_today
     current_plan.execution_on(today)
+  end
+  
+  def share_to_sina(date_str)
+    return false unless sina_ready?
+    return false unless current_plan
+    return false unless current_plan.share_to_sina?
+    sina_oauth_client.add_status(current_plan.execution_on(Date.parse(date_str)).description)
+    return true
   end
   
   private

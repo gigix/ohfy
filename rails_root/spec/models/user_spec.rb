@@ -79,4 +79,33 @@ describe User do
       @nick.sina_oauth_client.dump.should == client.dump
     end
   end
+  
+  describe :share_to_sina do
+    it "does nothing if user is not sina ready" do
+      @nick.share_to_sina(Date.today.to_s(:db)).should be_false
+    end
+    
+    it "does nothing if user doesn't have a current plan" do
+      @nick.should_receive(:sina_ready?).and_return(true)
+      @nick.share_to_sina(Date.today.to_s(:db)).should be_false
+    end
+    
+    it "does nothing if current plan cannot share to sina" do
+      @nick.create_plan!(Date.yesterday, ["Gym"])
+      @nick.should_receive(:sina_ready?).and_return(true)
+      @nick.share_to_sina(Date.today.to_s(:db)).should be_false
+    end
+    
+    it "shares execution of given date to sina" do
+      current_plan = @nick.create_plan!(Date.yesterday, ["Gym"])
+      current_plan.update_attribute(:share_to_sina, true)
+      @nick.should_receive(:sina_ready?).and_return(true)
+      
+      mock_client = Object.new
+      @nick.should_receive(:sina_oauth_client).and_return(mock_client)
+      mock_client.should_receive(:add_status)
+      
+      @nick.share_to_sina(Date.today.to_s(:db)).should be_true
+    end
+  end
 end
