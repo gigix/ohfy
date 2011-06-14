@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
     return false unless sina_ready?
     return false unless current_plan
     return false unless current_plan.share_to_sina?
-    sina_oauth_client.add_status(current_plan.execution_on(Date.parse(date_str)).description)
+    sina_oauth_client.add_status(current_plan.execution_on(Date.parse(date_str)).share_message)
     return true
   end
   

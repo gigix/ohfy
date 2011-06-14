@@ -1,3 +1,4 @@
 #!/bin/sh
 
+scp config/oauth/sina.yml ohfy@hourfor.me:~/ohfy/rails_root/config/oauth/ && \
 ssh ohfy@hourfor.me "cd ohfy/rails_root && git checkout . && git pull && touch tmp/restart.txt"

@@ -9,6 +9,10 @@ class Execution < ActiveRecord::Base
       date_str + "did nothing." :
       date_str + activities.map{|activity| activity.habit.title}.join("; ") + "."
   end
+  
+  def share_message
+    "@1HourForMe - #{description} ( http://1.HourFor.Me )"
+  end
 
   def actable?
     self.date == plan.today or self.date == plan.today - 1
