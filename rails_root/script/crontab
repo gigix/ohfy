@@ -1,0 +1,1 @@
+* * * * * cd /home/ohfy/ohfy/rails_root && bundle exec rails runner -e production script/share.rb
