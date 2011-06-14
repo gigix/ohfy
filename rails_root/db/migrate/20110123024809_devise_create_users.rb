@@ -10,8 +10,6 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
       # t.token_authenticatable
 
-      t.string :sina_oauth_client_dump
-
       t.timestamps
     end
 
