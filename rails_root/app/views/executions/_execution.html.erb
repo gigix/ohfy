@@ -4,7 +4,7 @@
 		<% execution.habits.each do |habit| %>
 		<li class='<%= execution.status_of(habit) %>'
 			onclick="<%= remote_function(
-			:success => 'window.location.reload()', 
+			:update => 'execution_detail',
 	        :url => (url_for :controller => :activities, :action => :toggle, :execution_id => execution, :habit_id => habit )) %>">
 			<%= habit.short_title %>
 		</li>
