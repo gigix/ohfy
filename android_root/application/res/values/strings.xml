@@ -3,5 +3,6 @@
 
     <string name="hello">Hello World, OhfmActivity!</string>
     <string name="app_name">1HourForMe</string>
+    <string name="title">1 Hour For Me</string>
 
 </resources>
