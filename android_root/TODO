@@ -1,19 +1,18 @@
 == DONE ==
-
+Sign in
 
 
 
 == DOING ==
-
+Build script
 
 
 
 == TODO ==
-Build script
-Sign in
 End-to-end test
 Fetch and display current activities
 Mark/unmark activity
+Error message for sign in
 Deploy to phone
 Sign out
 Auto-signin
