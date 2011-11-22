@@ -3,7 +3,6 @@ package org.thoughtworkers.ohfm.test;
 import org.thoughtworkers.ohfm.activity.OhfmActivity;
 import org.thoughtworkers.ohfm.activity.TodayActivity;
 import org.thoughtworkers.ohfm.domain.Server;
-import org.thoughtworkers.ohfm.domain.ServerImpl;
 import org.thoughtworkers.ohfm.domain.ServerStub;
 
 import android.app.Activity;
