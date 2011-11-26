@@ -1,7 +1,7 @@
 namespace :server do
   desc "Starts the rails server if it is not already running"
   task :start do
-    `rails s -d`
+    `rails s -d -etest`
     sleep 1
   end
 

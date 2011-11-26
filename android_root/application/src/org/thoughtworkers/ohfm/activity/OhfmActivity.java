@@ -22,8 +22,7 @@ public class OhfmActivity extends Activity implements OnClickListener {
 
 		findViewById(R.id.sign_in).setOnClickListener(this);
 
-		server = Server.create();
-		setTitle(getString(R.string.server_host));
+		server = Server.create(getString(R.string.server_host));
 	}
 
 	@Override
@@ -32,7 +31,7 @@ public class OhfmActivity extends Activity implements OnClickListener {
 		case R.id.sign_in:
 			try {
 				signIn();
-			} catch(Exception e) {
+			} catch (Exception e) {
 				Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
 			}
 			break;
@@ -45,12 +44,12 @@ public class OhfmActivity extends Activity implements OnClickListener {
 		String email = ((TextView) findViewById(R.id.email)).getText().toString();
 		String password = ((TextView) findViewById(R.id.password)).getText().toString();
 		String signInToken = server.signIn(email, password);
-		
-		if(signInToken != null) {
+
+		if (signInToken != null) {
 			startActivity(new Intent(this, TodayActivity.class));
 			return;
 		}
-		
+
 		Toast.makeText(this, "Sign in failed. Please check your email and password.", Toast.LENGTH_LONG).show();
 	}
 }

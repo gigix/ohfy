@@ -7,11 +7,11 @@ public abstract class Server {
 		Server.instance = instance;
 	}
 
-	public static Server create() {
+	public static Server create(String serverHost) {
 		if(instance != null) {
 			return instance;
 		}
-		return new ServerImpl();
+		return new ServerImpl(serverHost);
 	}
 
 	public abstract String signIn(String email, String password);

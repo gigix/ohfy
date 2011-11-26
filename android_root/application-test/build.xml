@@ -12,7 +12,7 @@
     <!-- version-tag: 1 -->
     <import file="${sdk.dir}/tools/ant/build.xml" />
 	
-	<target name="test.run" depends="clean, instrument, install">
+	<target name="test.run" depends="clean, uninstall, instrument, install">
 		<exec executable="ant" outputproperty="test.output">
 			<arg value="test" />
 		</exec>

@@ -3,3 +3,5 @@ bin
 local.properties
 classes
 res/values/settings.xml
+build
+test/settings.properties

@@ -15,7 +15,7 @@
 	<property name="test.result.dir" value="${build.dir}/reports" />
 	<property name="classes.dir" value="${build.dir}/classes" />
 
-	<path id="unit.test.classpath">
+	<path id="test.classpath">
 		<fileset dir="${test.libs.dir}" includes="*.jar" />
 		<fileset dir="${libs.dir}" includes="**/*.jar" />
 		<pathelement path="${sdk.dir}/platforms/android-10/android.jar" />
@@ -26,7 +26,7 @@
 
 	<import file="${sdk.dir}/tools/ant/build.xml" />
 
-	<target name="test.prepare" depends="dir.prepare, setting.prepare" />
+	<target name="test.prepare" depends="dir.prepare" />
 	
 	<target name="dir.prepare">
 		<delete dir="${build.dir}" />
@@ -35,27 +35,22 @@
 		<mkdir dir="${test.result.dir}" />
 	</target>
 	
-	<target name="setting.prepare">
-		<property name="settings.xml.file" value="${res.dir}/values/settings.xml" />
-		<property name="settings.template.file" value="${src.dir}/settings.xml.template" />
-
-		<copy file="${settings.template.file}" tofile="${settings.xml.file}" />
-		<!-- TODO: 10.211.55.2 is my vnic0 ip. should get this ip dynamically. -->
-		<replace file="${settings.xml.file}" token="#{SERVER_HOST}" value="10.211.55.2" />
-	</target>
-
-	<target name="test.unit" depends="test.prepare">
-		<javac destdir="${classes.dir}" classpathref="unit.test.classpath" srcdir="${gen.src.dir}" debug="true" />
-		<javac destdir="${classes.dir}" classpathref="unit.test.classpath" srcdir="${src.dir}" debug="true" />
-		<javac destdir="${classes.dir}" classpathref="unit.test.classpath" srcdir="${test.src.dir}" debug="true" />
-		<junit failureproperty="unit.test.failed">
-			<classpath refid="unit.test.classpath" />
+	<target name="test.local" depends="test.prepare">
+		<javac destdir="${classes.dir}" classpathref="test.classpath" srcdir="${gen.src.dir}" debug="true" />
+		<javac destdir="${classes.dir}" classpathref="test.classpath" srcdir="${src.dir}" debug="true" />
+		<javac destdir="${classes.dir}" classpathref="test.classpath" srcdir="${test.src.dir}" debug="true" />
+		<copy todir="${classes.dir}">
+			<fileset dir="${test.src.dir}" includes="*.properties" />
+		</copy>
+		
+		<junit failureproperty="test.failed">
+			<classpath refid="test.classpath" />
 			<batchtest fork="true" todir="${test.result.dir}">
 				<formatter type="plain" />
 				<fileset dir="${test.src.dir}" includes="**/*Test.java" />
 			</batchtest>
 		</junit>
-		<fail if="unit.test.failed" message="Unit test failed!" />
+		<fail if="test.failed" message="Unit test failed!" />
 	</target>
 	
 </project>
