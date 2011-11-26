@@ -7,4 +7,4 @@ require 'rake'
 Ohfy::Application.load_tasks
 
 Rake::Task[:default].prerequisites.clear
-task :default => %w(config:generate db:reset spec server:restart cucumber server:stop stats)
+task :default => %w(config:generate db:reset spec stats)

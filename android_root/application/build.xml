@@ -1,85 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="1HourForMe" default="help">
+<project name="1HourForMe" default="help" basedir=".">
 
-    <!-- The local.properties file is created and updated by the 'android' tool.
-         It contains the path to the SDK. It should *NOT* be checked into
-         Version Control Systems. -->
-    <loadproperties srcFile="local.properties" />
+	<loadproperties srcFile="local.properties" />
+	<property file="ant.properties" />
+	<loadproperties srcFile="project.properties" />
 
-    <!-- The ant.properties file can be created by you. It is only edited by the
-         'android' tool to add properties to it.
-         This is the place to change some Ant specific build properties.
-         Here are some properties you may want to change/update:
+	<property name="src.dir" value="${basedir}/src" />
+	<property name="res.dir" value="${basedir}/res" />	
+	<property name="gen.src.dir" value="${basedir}/gen" />
+	<property name="test.src.dir" value="${basedir}/test" />
+	<property name="libs.dir" value="${basedir}/libs" />
+	<property name="test.libs.dir" value="${basedir}/testlibs" />
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="test.result.dir" value="${build.dir}/reports" />
+	<property name="classes.dir" value="${build.dir}/classes" />
 
-         source.dir
-             The name of the source directory. Default is 'src'.
-         out.dir
-             The name of the output directory. Default is 'bin'.
+	<path id="unit.test.classpath">
+		<fileset dir="${test.libs.dir}" includes="*.jar" />
+		<fileset dir="${libs.dir}" includes="**/*.jar" />
+		<pathelement path="${sdk.dir}/platforms/android-10/android.jar" />
+		<pathelement path="${classes.dir}" />
+	</path>
+	
+	<fail message="sdk.dir is missing. Make sure to generate local.properties using 'android update project'" unless="sdk.dir" />
 
-         For other overridable properties, look at the beginning of the rules
-         files in the SDK, at tools/ant/build.xml
+	<import file="${sdk.dir}/tools/ant/build.xml" />
 
-         Properties related to the SDK location or the project target should
-         be updated using the 'android' tool with the 'update' action.
+	<target name="test.prepare" depends="dir.prepare, setting.prepare" />
+	
+	<target name="dir.prepare">
+		<delete dir="${build.dir}" />
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${classes.dir}" />
+		<mkdir dir="${test.result.dir}" />
+	</target>
+	
+	<target name="setting.prepare">
+		<property name="settings.xml.file" value="${res.dir}/values/settings.xml" />
+		<property name="settings.template.file" value="${src.dir}/settings.xml.template" />
 
-         This file is an integral part of the build system for your
-         application and should be checked into Version Control Systems.
+		<copy file="${settings.template.file}" tofile="${settings.xml.file}" />
+		<!-- TODO: 10.211.55.2 is my vnic0 ip. should get this ip dynamically. -->
+		<replace file="${settings.xml.file}" token="#{SERVER_HOST}" value="10.211.55.2" />
+	</target>
 
-         -->
-    <property file="ant.properties" />
-
-    <!-- The project.properties file is created and updated by the 'android'
-         tool, as well as ADT.
-
-         This contains project specific properties such as project target, and library
-         dependencies. Lower level build properties are stored in ant.properties
-         (or in .classpath for Eclipse projects).
-
-         This file is an integral part of the build system for your
-         application and should be checked into Version Control Systems. -->
-    <loadproperties srcFile="project.properties" />
-
-    <!-- quick check on sdk.dir -->
-    <fail
-            message="sdk.dir is missing. Make sure to generate local.properties using 'android update project'"
-            unless="sdk.dir"
-    />
-
-
-<!-- extension targets. Uncomment the ones where you want to do custom work
-     in between standard targets -->
-<!--
-    <target name="-pre-build">
-    </target>
-    <target name="-pre-compile">
-    </target>
-
-    /* This is typically used for code obfuscation.
-       Compiled code location: ${out.classes.absolute.dir}
-       If this is not done in place, override ${out.dex.input.absolute.dir} */
-    <target name="-post-compile">
-    </target>
--->
-
-    <!-- Import the actual build file.
-
-         To customize existing targets, there are two options:
-         - Customize only one target:
-             - copy/paste the target into this file, *before* the
-               <import> task.
-             - customize it to your needs.
-         - Customize the whole content of build.xml
-             - copy/paste the content of the rules files (minus the top node)
-               into this file, replacing the <import> task.
-             - customize to your needs.
-
-         ***********************
-         ****** IMPORTANT ******
-         ***********************
-         In all cases you must update the value of version-tag below to read 'custom' instead of an integer,
-         in order to avoid having your file be overridden by tools such as "android update project"
-    -->
-    <!-- version-tag: 1 -->
-    <import file="${sdk.dir}/tools/ant/build.xml" />
-
+	<target name="test.unit" depends="test.prepare">
+		<javac destdir="${classes.dir}" classpathref="unit.test.classpath" srcdir="${gen.src.dir}" debug="true" />
+		<javac destdir="${classes.dir}" classpathref="unit.test.classpath" srcdir="${src.dir}" debug="true" />
+		<javac destdir="${classes.dir}" classpathref="unit.test.classpath" srcdir="${test.src.dir}" debug="true" />
+		<junit failureproperty="unit.test.failed">
+			<classpath refid="unit.test.classpath" />
+			<batchtest fork="true" todir="${test.result.dir}">
+				<formatter type="plain" />
+				<fileset dir="${test.src.dir}" includes="**/*Test.java" />
+			</batchtest>
+		</junit>
+		<fail if="unit.test.failed" message="Unit test failed!" />
+	</target>
+	
 </project>

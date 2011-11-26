@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class OhfmActivity extends Activity implements OnClickListener {
 	private Server server;
@@ -22,13 +23,18 @@ public class OhfmActivity extends Activity implements OnClickListener {
 		findViewById(R.id.sign_in).setOnClickListener(this);
 
 		server = Server.create();
+		setTitle(getString(R.string.server_host));
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.sign_in:
-			signIn();
+			try {
+				signIn();
+			} catch(Exception e) {
+				Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+			}
 			break;
 		default:
 			throw new RuntimeException("Unexpected click event to " + v.getId());
@@ -38,10 +44,13 @@ public class OhfmActivity extends Activity implements OnClickListener {
 	private void signIn() {
 		String email = ((TextView) findViewById(R.id.email)).getText().toString();
 		String password = ((TextView) findViewById(R.id.password)).getText().toString();
-		if (server.signIn(email, password)) {
+		String signInToken = server.signIn(email, password);
+		
+		if(signInToken != null) {
 			startActivity(new Intent(this, TodayActivity.class));
 			return;
 		}
-		//TODO: handle failed signing in here
+		
+		Toast.makeText(this, "Sign in failed. Please check your email and password.", Toast.LENGTH_LONG).show();
 	}
 }

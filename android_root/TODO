@@ -1,16 +1,16 @@
 == DONE ==
 Sign in
+Build script
+End-to-end test
 
 
 
 == DOING ==
-Build script
+Fetch and display current activities
 
 
 
 == TODO ==
-End-to-end test
-Fetch and display current activities
 Mark/unmark activity
 Error message for sign in
 Deploy to phone

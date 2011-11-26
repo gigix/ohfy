@@ -14,5 +14,5 @@ public abstract class Server {
 		return new ServerImpl();
 	}
 
-	public abstract boolean signIn(String email, String password);
+	public abstract String signIn(String email, String password);
 }

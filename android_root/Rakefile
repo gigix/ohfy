@@ -1,0 +1,11 @@
+CURRENT_DIR = File.dirname(__FILE__)
+
+def exec(cmd)
+  puts "[Exec] #{cmd}"
+  raise "Execution failed!" unless system cmd
+end
+
+task :default do
+  exec "ant -f #{CURRENT_DIR}/application/build.xml clean test.prepare debug"
+  exec "ant -f #{CURRENT_DIR}/application-test/build.xml test.run"
+end

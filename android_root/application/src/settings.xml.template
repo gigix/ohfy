@@ -1,0 +1,3 @@
+<resources>
+	<string name="server.host">#{SERVER_HOST}</string>
+</resources>

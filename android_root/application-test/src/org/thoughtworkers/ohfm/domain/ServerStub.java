@@ -6,7 +6,7 @@ import java.util.Map;
 public class ServerStub extends Server {
 
 	@Override
-	public boolean signIn(String email, String password) {
+	public String signIn(String email, String password) {
 		@SuppressWarnings("serial")
 		Map<String, String> validLogins = new HashMap<String, String>() {
 			{
@@ -14,7 +14,10 @@ public class ServerStub extends Server {
 			}
 		};
 		
-		return validLogins.containsKey(email) && validLogins.get(email).equals(password);
+		if(validLogins.containsKey(email) && validLogins.get(email).equals(password)) {
+			return email;
+		}
+		return null;
 	}
 
 }

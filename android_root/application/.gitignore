@@ -1,3 +1,5 @@
 gen
 bin
 local.properties
+classes
+res/values/settings.xml
