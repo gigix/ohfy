@@ -27,8 +27,8 @@ public class ServerStub extends Server {
 	public List<TodoItem> fetchTodoItems(String signInToken) {
 		return new ArrayList<TodoItem>() {
 			{
-				add(new TodoItem("学Android开发"));
-				add(new TodoItem("游泳"));
+				add(new TodoItem("学Android开发", true));
+				add(new TodoItem("游泳", false));
 			}
 		};
 	}

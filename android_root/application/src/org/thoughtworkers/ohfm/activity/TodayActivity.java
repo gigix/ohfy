@@ -6,6 +6,7 @@ import org.thoughtworkers.ohfm.domain.Server;
 import org.thoughtworkers.ohfm.domain.TodoItem;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -26,11 +27,23 @@ public class TodayActivity extends Activity {
 		layout.setOrientation(LinearLayout.VERTICAL);
 		
 		for (TodoItem todoItem : todoItems) {
-			CheckBox checkBox = new CheckBox(this);
-			checkBox.append(todoItem.getTitle());
-			layout.addView(checkBox);
+			layout.addView(buildCheckBox(todoItem));
 		}
 		
 		setContentView(layout);
+	}
+
+	private CheckBox buildCheckBox(TodoItem todoItem) {
+		CheckBox checkBox = new CheckBox(this);
+		checkBox.append(todoItem.getTitle());
+		checkBox.setChecked(todoItem.isDone());
+		checkBox.setTextColor(Color.BLACK);
+		checkBox.setBackgroundColor(backgroundColor(todoItem.isDone()));
+		checkBox.setHeight(150);
+		return checkBox;
+	}
+
+	private int backgroundColor(boolean done) {
+		return done ? Color.GREEN : Color.YELLOW;
 	}
 }

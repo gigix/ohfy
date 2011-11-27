@@ -11,6 +11,7 @@ task :default => ["e2e:test"]
 namespace :e2e do
   task :test do
     cd RAILS_ROOT do
+      exec "rake"
       exec "rake db:reset db:test:load server:restart"
     end
     
