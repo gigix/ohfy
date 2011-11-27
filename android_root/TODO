@@ -11,6 +11,7 @@ Fetch and display current activities
 
 
 == TODO ==
+Secure sign in token
 Mark/unmark activity
 Error message for sign in
 Deploy to phone

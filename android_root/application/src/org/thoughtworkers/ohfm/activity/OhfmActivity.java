@@ -22,7 +22,7 @@ public class OhfmActivity extends Activity implements OnClickListener {
 
 		findViewById(R.id.sign_in).setOnClickListener(this);
 
-		server = Server.create(getString(R.string.server_host));
+		server = Server.create(this);
 	}
 
 	@Override
@@ -46,7 +46,10 @@ public class OhfmActivity extends Activity implements OnClickListener {
 		String signInToken = server.signIn(email, password);
 
 		if (signInToken != null) {
-			startActivity(new Intent(this, TodayActivity.class));
+			Intent intent = new Intent(this, TodayActivity.class);
+			intent.putExtra(Server.SIGN_IN_TOKEN, signInToken);
+			
+			startActivity(intent);
 			return;
 		}
 

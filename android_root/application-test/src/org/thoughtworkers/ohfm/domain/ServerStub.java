@@ -1,6 +1,8 @@
 package org.thoughtworkers.ohfm.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ServerStub extends Server {
@@ -18,6 +20,17 @@ public class ServerStub extends Server {
 			return email;
 		}
 		return null;
+	}
+
+	@SuppressWarnings("serial")
+	@Override
+	public List<TodoItem> fetchTodoItems(String signInToken) {
+		return new ArrayList<TodoItem>() {
+			{
+				add(new TodoItem("学Android开发"));
+				add(new TodoItem("游泳"));
+			}
+		};
 	}
 
 }

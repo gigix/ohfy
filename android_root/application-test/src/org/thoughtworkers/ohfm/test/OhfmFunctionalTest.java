@@ -10,12 +10,12 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import com.jayway.android.robotium.solo.Solo;
 
-public class OhfmActivityTest extends ActivityInstrumentationTestCase2<OhfmActivity> {
+public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmActivity> {
 	private static final Class<OhfmActivity> ACTIVITY_UNDER_TEST = OhfmActivity.class;
 
 	private Solo solo;
 
-	public OhfmActivityTest() {
+	public OhfmFunctionalTest() {
 		super(ACTIVITY_UNDER_TEST.getPackage().getName(), ACTIVITY_UNDER_TEST);
 	}
 
@@ -50,6 +50,11 @@ public class OhfmActivityTest extends ActivityInstrumentationTestCase2<OhfmActiv
 	public void test_should_fail_signing_in_with_invalid_email_and_password() throws Exception {
 		signIn("not.exist@test.com", "password");
 		assertCurrentActivity(OhfmActivity.class);
+	}
+	
+	public void test_should_show_todo_items_in_today_activity() throws Exception {
+		signIn("user@test.com", "password");
+		assertStringExist("学Android开发");
 	}
 
 	private void signIn(String email, String password) {
