@@ -6,13 +6,36 @@ import org.thoughtworkers.ohfm.domain.Server;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class OhfmActivity extends Activity implements OnClickListener {
+	protected static final int MSG_LOGIN_FAIL = 0;
+	protected static final int MSG_LOGIN_SUCCESS = 1;
+
 	private Server server;
+	
+	private Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			if (msg.what == MSG_LOGIN_SUCCESS) {
+				String signInToken = (String) msg.obj;
+				Intent intent = new Intent(OhfmActivity.this, TodayActivity.class);
+				intent.putExtra(Server.SIGN_IN_TOKEN, signInToken);
+				
+				startActivity(intent);
+				return;
+			}
+			
+			if (msg.what == MSG_LOGIN_FAIL) {
+				Toast.makeText(OhfmActivity.this, "Sign in failed. Please check your email and password.", Toast.LENGTH_LONG).show();
+				return;
+			}
+		};
+	};
 
 	/** Called when the activity is first created. */
 	@Override
@@ -30,7 +53,14 @@ public class OhfmActivity extends Activity implements OnClickListener {
 		switch (v.getId()) {
 		case R.id.sign_in:
 			try {
-				signIn();
+				new Thread(new Runnable() {
+
+					@Override
+					public void run() {
+						signIn();
+					}
+					
+				}).start();
 			} catch (Exception e) {
 				Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
 			}
@@ -46,13 +76,13 @@ public class OhfmActivity extends Activity implements OnClickListener {
 		String signInToken = server.signIn(email, password);
 
 		if (signInToken != null) {
-			Intent intent = new Intent(this, TodayActivity.class);
-			intent.putExtra(Server.SIGN_IN_TOKEN, signInToken);
-			
-			startActivity(intent);
+			Message msg = handler.obtainMessage();
+			msg.what = MSG_LOGIN_SUCCESS;
+			msg.obj = signInToken;
+			handler.sendMessage(msg);
 			return;
 		}
 
-		Toast.makeText(this, "Sign in failed. Please check your email and password.", Toast.LENGTH_LONG).show();
+		handler.sendEmptyMessage(MSG_LOGIN_FAIL);
 	}
 }
