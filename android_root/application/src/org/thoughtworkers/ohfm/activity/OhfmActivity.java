@@ -47,7 +47,7 @@ public class OhfmActivity extends Activity implements OnClickListener {
 
 		if (signInToken != null) {
 			Intent intent = new Intent(this, TodayActivity.class);
-			intent.putExtra(Server.SIGN_IN_TOKEN, signInToken);
+			intent.putExtra(Server.SIGN_IN_TOKEN_NAME, signInToken);
 			
 			startActivity(intent);
 			return;

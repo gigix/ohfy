@@ -1,0 +1,5 @@
+#Fri Dec 02 23:21:44 GMT+08:00 2011
+eclipse.preferences.version=1
+encoding//src/org/thoughtworkers/ohfm/domain/ServerImpl.java=UTF-8
+encoding//test/org/thoughtworkers/ohfm/domain/ServerIntegrationTest.java=UTF-8
+encoding//test/org/thoughtworkers/ohfm/domain/TodoItemTest.java=UTF-8

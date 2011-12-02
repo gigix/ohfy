@@ -1,13 +1,18 @@
 class ApiController < ApplicationController
   skip_before_filter :verify_authenticity_token
   
+  SIGN_IN_TOKEN_NAME = "sign_in_token"
+  
   def sign_in
-    user = User.find_for_authentication(:email => params[:email])
-    if user and user.valid_password?(params[:password])
-      headers["sign_in_token"] = user.email 
-      render :text => "Sign in succeeded"
-    else
-      render :text => "Sign in failed"
-    end
+    headers[SIGN_IN_TOKEN_NAME] = User.sign_in!(params[:email], params[:password])
+    render :text => "Sign in succeeded"
+  rescue
+    render :text => "Sign in failed"
   end
+  
+  def todos
+    sign_in_token = request.headers[SIGN_IN_TOKEN_NAME]
+    execution = User.find_by_sign_in_token(sign_in_token).execution_on_today
+    render :text => execution.to_json(:only => :id, :methods => :todo_items)
+  end    
 end

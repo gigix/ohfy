@@ -21,7 +21,7 @@ public class TodayActivity extends Activity {
 
 	private void addTodoItems() {
 		Server server = Server.create(this);
-		List<TodoItem> todoItems = server.fetchTodoItems(getIntent().getStringExtra(Server.SIGN_IN_TOKEN));
+		List<TodoItem> todoItems = server.fetchTodoItems(getIntent().getStringExtra(Server.SIGN_IN_TOKEN_NAME));
 		
 		LinearLayout layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);

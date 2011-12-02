@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110614104523) do
+ActiveRecord::Schema.define(:version => 20111129040908) do
 
   create_table "activities", :force => true do |t|
     t.integer  "execution_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20110614104523) do
     t.datetime "updated_at"
     t.string   "time_zone_name",                        :default => "UTC"
     t.string   "sina_oauth_client_dump"
+    t.string   "sign_in_token"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

@@ -3,6 +3,10 @@ class Execution < ActiveRecord::Base
   has_many :activities
   has_many :habits, :through => :plan
 
+  def todo_items
+    habits.map{|habit| TodoItem.new(habit, !!acted?(habit)) }
+  end
+
   def description
     date_str = "#{date.to_s(:db)}: "
     activities.blank? ? 

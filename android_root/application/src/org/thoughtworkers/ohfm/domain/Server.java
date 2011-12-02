@@ -20,7 +20,7 @@ public abstract class Server {
 		return new ServerImpl(serverHost);
 	}
 
-	public static final String SIGN_IN_TOKEN = "signInToken";
+	public static final String SIGN_IN_TOKEN_NAME = "sign_in_token";
 
 	public abstract String signIn(String email, String password);
 

@@ -2,17 +2,17 @@
 Sign in
 Build script
 End-to-end test
+Secure sign in token
+Fetch and display current todo items
 
 
 
 == DOING ==
-Fetch and display current activities
+Mark/unmark activity
 
 
 
 == TODO ==
-Secure sign in token
-Mark/unmark activity
 Error message for sign in
 Deploy to phone
 Sign out

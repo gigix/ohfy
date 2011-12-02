@@ -5,10 +5,19 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :sign_in_token
   
   has_many :plans, :include => {:executions => :activities}
   has_many :executions, :through => :plans, :include => :activities
+  
+  def self.sign_in!(email, password)
+    user = find_for_authentication(:email => email)
+    return nil unless user.valid_password?(password)
+
+    sign_in_token = user.email + "|" + rand(Time.now.to_f).to_s
+    user.update_attributes(:sign_in_token => sign_in_token)
+    return sign_in_token
+  end
   
   def name
     self.email.split('@').first

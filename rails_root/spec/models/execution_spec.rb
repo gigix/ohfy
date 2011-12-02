@@ -58,4 +58,11 @@ describe Execution do
       execution.status.should == Execution::Status::GOOD
     end
   end
+  
+  describe :todo_items do
+    it "returns todo items" do
+      execution = @plan.execution_on(Date.today)
+      execution.todo_items.should have(3).items
+    end
+  end
 end
