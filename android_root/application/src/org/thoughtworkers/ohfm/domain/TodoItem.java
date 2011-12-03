@@ -8,11 +8,15 @@ import com.google.gson.Gson;
 
 public class TodoItem {
 	private final String title;
-	private final boolean done;
+	private boolean done;
+	private final int habitId;
+	private final int executionId;
 
 	public TodoItem(String title, boolean done, int executionId, int habitId) {
 		this.title = title;
 		this.done = done;
+		this.executionId = executionId;
+		this.habitId = habitId;
 	}
 	
 	public String getTitle() {
@@ -21,6 +25,18 @@ public class TodoItem {
 
 	public boolean isDone() {
 		return done;
+	}
+
+	public void setDone(boolean done) {
+		this.done = done;
+	}
+
+	public int getHabitId() {
+		return habitId;
+	}
+
+	public int getExecutionId() {
+		return executionId;
 	}
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })

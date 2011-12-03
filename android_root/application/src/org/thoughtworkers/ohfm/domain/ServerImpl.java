@@ -82,4 +82,10 @@ public class ServerImpl extends Server {
 		return String.format("http://%s:3000/api/%s", serverHost, apiName);
 	}
 
+	@Override
+	public void updateStatus(TodoItem todoItem) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

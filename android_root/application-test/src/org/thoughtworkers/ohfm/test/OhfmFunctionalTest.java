@@ -1,5 +1,7 @@
 package org.thoughtworkers.ohfm.test;
 
+import java.util.ArrayList;
+
 import org.thoughtworkers.ohfm.activity.OhfmActivity;
 import org.thoughtworkers.ohfm.activity.TodayActivity;
 import org.thoughtworkers.ohfm.domain.Server;
@@ -7,6 +9,7 @@ import org.thoughtworkers.ohfm.domain.ServerStub;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.CheckBox;
 
 import com.jayway.android.robotium.solo.Solo;
 
@@ -42,25 +45,58 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		super.tearDown();
 	}
 
-	public void test_should_be_able_to_sign_in_with_valid_email_and_password() throws Exception {
+	public void test_simplest_usage_scenario() throws Exception {
+		should_not_allow_invalid_sign_in();
+		should_allow_valid_sign_in();
+		should_show_todo_items_after_signed_in();
+		should_be_able_to_change_status_of_todo_items_after_signed_in();
+	}
+
+	private void should_be_able_to_change_status_of_todo_items_after_signed_in() {
+		solo.clickOnCheckBox(0);
+		solo.clickOnCheckBox(1);
+		solo.goBack();
+		
+		signIn("user@test.com", "password");
+		assertCheckBoxIsNotChecked(0);
+		assertCheckBoxIsChecked(1);
+	}
+
+	private void should_show_todo_items_after_signed_in() {
+		assertStringExist("学Android开发");		
+		assertCheckBoxIsChecked(0);
+		assertCheckBoxIsNotChecked(1);
+	}
+
+	private void should_allow_valid_sign_in() {
 		signIn("user@test.com", "password");
 		assertCurrentActivity(TodayActivity.class);
 	}
 
-	public void test_should_fail_signing_in_with_invalid_email_and_password() throws Exception {
+	private void should_not_allow_invalid_sign_in() {
 		signIn("not.exist@test.com", "password");
 		assertCurrentActivity(OhfmActivity.class);
 	}
+
+	private void assertCheckBoxIsChecked(int index) {
+		ArrayList<CheckBox> allCheckBoxes = solo.getCurrentCheckBoxes();
+		assertTrue(allCheckBoxes.get(index).isChecked());
+	}
 	
-	public void test_should_show_todo_items_in_today_activity() throws Exception {
-		signIn("user@test.com", "password");
-		assertStringExist("学Android开发");
+	private void assertCheckBoxIsNotChecked(int index) {
+		ArrayList<CheckBox> allCheckBoxes = solo.getCurrentCheckBoxes();
+		assertFalse(allCheckBoxes.get(index).isChecked());
+	}
+	
+	private void signIn(String email, String password) {
+		enterText(0, email);
+		enterText(1, password);
+		solo.clickOnButton(0);
 	}
 
-	private void signIn(String email, String password) {
-		solo.enterText(0, email);
-		solo.enterText(1, password);
-		solo.clickOnButton(0);
+	private void enterText(int index, String text) {
+		solo.clearEditText(index);
+		solo.enterText(index, text);
 	}
 
 	private void assertCurrentActivity(Class<? extends Activity> expectedClass) {
