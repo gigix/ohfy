@@ -35,5 +35,7 @@ describe ApiController do
       get :todos
       response.body.should be_include("Android")
     end
+    
+    it "updates execution status"
   end
 end

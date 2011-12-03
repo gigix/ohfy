@@ -59,6 +59,12 @@ public class ServerImpl extends Server {
 		return TodoItem.fromJson(content);
 	}
 
+	@Override
+	public void updateStatus(TodoItem todoItem) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private String fetch(HttpUriRequest request) {
 		try {
 			HttpResponse response = new DefaultHttpClient().execute(request);
@@ -81,11 +87,4 @@ public class ServerImpl extends Server {
 	private String urlToApi(String apiName) {
 		return String.format("http://%s:3000/api/%s", serverHost, apiName);
 	}
-
-	@Override
-	public void updateStatus(TodoItem todoItem) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }
