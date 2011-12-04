@@ -1,6 +1,8 @@
+*.keystore
 gen
 bin
 local.properties
+ant.properties
 classes
 res/values/settings.xml
 build

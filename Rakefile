@@ -17,6 +17,7 @@ namespace :e2e do
     
     cd ANDROID_ROOT do
       exec "rake"
+      exec "rake release"
     end
     
     cd RAILS_ROOT do

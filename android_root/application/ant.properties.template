@@ -1,0 +1,4 @@
+key.store=ohfm-release-key.keystore
+key.alias=ohfm_key
+key.store.password=<PASSWORD>
+key.alias.password=<PASSWORD>

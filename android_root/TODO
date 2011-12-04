@@ -5,15 +5,15 @@ End-to-end test
 Secure sign in token
 Fetch and display current todo items
 Mark/unmark activity
+Deploy to phone
 
 
 
 == DOING ==
-Deploy to phone
+Auto-signin
 
 
 
 == TODO ==
 Error message for sign in
 Sign out
-Auto-signin

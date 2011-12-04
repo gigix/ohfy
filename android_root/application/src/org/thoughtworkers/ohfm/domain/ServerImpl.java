@@ -101,6 +101,6 @@ public class ServerImpl extends Server {
 	}
 
 	private String urlToApi(String apiName) {
-		return String.format("http://%s:3000/api/%s", serverHost, apiName);
+		return String.format("http://%s/api/%s", serverHost, apiName);
 	}
 }

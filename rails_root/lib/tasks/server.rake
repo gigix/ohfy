@@ -2,13 +2,13 @@ namespace :server do
   desc "Starts the rails server if it is not already running"
   task :start do
     `rails s -d -etest`
-    sleep 1
   end
 
   desc "Stops the rails server"
   task :stop do
-    # `killall -9 ruby` #TODO: not a best solution...
-    sleep 1
+    target_row = `ps aux|grep rails`.split("\n").map(&:strip).find{|row| row.include?("ruby script/rails")}
+    pid = target_row.match(/^\w+\s+(\d+)\s+/)[1]
+    `kill -9 #{pid}`
   end
 
   desc "Restarts the rails server"
