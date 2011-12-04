@@ -19,7 +19,7 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 	@Override
 	public void onCheckedChanged(CompoundButton target, boolean checked) {
 		TodoItemCheckBox checkBox = (TodoItemCheckBox) target;
-		checkBox.updateCheckedStatus(server);
+		checkBox.updateCheckedStatus(server, getSignInToken());
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 	}
 
 	private void addTodoItems() {
-		List<TodoItem> todoItems = server.fetchTodoItems(getIntent().getStringExtra(Server.SIGN_IN_TOKEN_NAME));
+		List<TodoItem> todoItems = server.fetchTodoItems(getSignInToken());
 		
 		LinearLayout layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
@@ -41,6 +41,10 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 		}
 		
 		setContentView(layout);
+	}
+
+	private String getSignInToken() {
+		return getIntent().getStringExtra(Server.SIGN_IN_TOKEN_NAME);
 	}
 
 	private CheckBox buildCheckBox(TodoItem todoItem) {

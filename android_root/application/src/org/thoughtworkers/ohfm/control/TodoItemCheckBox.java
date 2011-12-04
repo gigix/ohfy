@@ -26,10 +26,10 @@ public class TodoItemCheckBox extends CheckBox {
 		setBackgroundColor(backgroundColor(todoItem.isDone()));
 	}
 	
-	public void updateCheckedStatus(Server server) {
+	public void updateCheckedStatus(Server server, String signInToken) {
 		todoItem.setDone(isChecked());
 		updateBackgroundColor();
-		server.updateStatus(todoItem);
+		server.updateStatus(todoItem, signInToken);
 	}
 
 	private int backgroundColor(boolean done) {

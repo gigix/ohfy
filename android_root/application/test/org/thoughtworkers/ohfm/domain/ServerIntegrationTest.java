@@ -20,18 +20,18 @@ public class ServerIntegrationTest extends TestCase {
 		serverHost = (String) settings.get("server.host");
 		server = Server.create(serverHost);
 	}
-	
+
 	public void test_should_sign_in_with_valid_username_and_password() throws IOException {
 		String signInToken = server.signIn(VALID_EMAIL, VALID_PASSWORD);
 		assertNotNull(signInToken);
 		assertTrue(signInToken.length() > 0);
-	}	
-	
+	}
+
 	public void test_should_not_get_sign_in_token_with_invalid_username_and_password() throws Exception {
 		String signInToken = server.signIn(INVALID_EMAIL, VALID_PASSWORD);
 		assertNull(signInToken);
 	}
-	
+
 	public void test_should_fetch_todo_items_with_valid_sign_in_token() throws Exception {
 		String signInToken = server.signIn(VALID_EMAIL, VALID_PASSWORD);
 		List<TodoItem> todoItems = server.fetchTodoItems(signInToken);
@@ -39,8 +39,30 @@ public class ServerIntegrationTest extends TestCase {
 
 		TodoItem firstTodoItem = todoItems.get(0);
 		assertTrue(firstTodoItem.isDone());
-		
+
 		TodoItem secondTodoItem = todoItems.get(1);
 		assertFalse(secondTodoItem.isDone());
+	}
+
+	public void test_should_update_status_of_todo_item() throws Exception {
+		String signInToken = server.signIn(VALID_EMAIL, VALID_PASSWORD);
+		TodoItem todoItem = getFirstTodoItem(signInToken);
+		assertTrue(todoItem.isDone());
+
+		todoItem.setDone(false);
+		server.updateStatus(todoItem, signInToken);
+		todoItem = getFirstTodoItem(signInToken);
+		assertFalse(todoItem.isDone());
+
+		todoItem.setDone(true);
+		server.updateStatus(todoItem, signInToken);
+		todoItem = getFirstTodoItem(signInToken);
+		assertTrue(todoItem.isDone());
+	}
+
+	private TodoItem getFirstTodoItem(String signInToken) {
+		List<TodoItem> todoItems = server.fetchTodoItems(signInToken);
+		TodoItem firstTodoItem = todoItems.get(0);
+		return firstTodoItem;
 	}
 }

@@ -4,16 +4,16 @@ Build script
 End-to-end test
 Secure sign in token
 Fetch and display current todo items
+Mark/unmark activity
 
 
 
 == DOING ==
-Mark/unmark activity
+Deploy to phone
 
 
 
 == TODO ==
 Error message for sign in
-Deploy to phone
 Sign out
 Auto-signin

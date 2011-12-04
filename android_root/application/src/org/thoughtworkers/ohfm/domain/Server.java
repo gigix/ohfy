@@ -20,15 +20,15 @@ public abstract class Server {
 		return new ServerImpl(serverHost);
 	}
 
-	public static final String SIGN_IN_TOKEN_NAME = "sign_in_token";
-
-	public abstract String signIn(String email, String password);
-
 	public static Server create(Context context) {
 		return create(context.getString(R.string.server_host));
 	}
 
+	public static final String SIGN_IN_TOKEN_NAME = "sign_in_token";
+
+	public abstract String signIn(String email, String password);
+
 	public abstract List<TodoItem> fetchTodoItems(String signInToken);
 
-	public abstract void updateStatus(TodoItem todoItem);
+	public abstract void updateStatus(TodoItem todoItem, String signInToken);
 }

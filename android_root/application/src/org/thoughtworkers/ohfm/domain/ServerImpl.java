@@ -35,13 +35,7 @@ public class ServerImpl extends Server {
 		};
 
 		HttpPost request = new HttpPost(urlToApi("sign_in"));
-		HttpResponse response;
-		try {
-			request.setEntity(new UrlEncodedFormEntity(params));
-			response = new DefaultHttpClient().execute(request);
-		} catch (Exception e) {
-			throw new OhfmException(e);
-		}
+		HttpResponse response = doPost(request, params);
 
 		Header tokenHeader = response.getFirstHeader(SIGN_IN_TOKEN_NAME);
 		if (tokenHeader == null) {
@@ -60,9 +54,31 @@ public class ServerImpl extends Server {
 	}
 
 	@Override
-	public void updateStatus(TodoItem todoItem) {
-		// TODO Auto-generated method stub
+	public void updateStatus(final TodoItem todoItem, String signInToken) {
+		@SuppressWarnings("serial")
+		List<NameValuePair> params = new ArrayList<NameValuePair>() {
+			{
+				add(new BasicNameValuePair("execution_id", todoItem.getExecutionId().toString()));
+				add(new BasicNameValuePair("habit_id", todoItem.getHabitId().toString()));
+				add(new BasicNameValuePair("done", todoItem.isDone().toString()));
+			}
+		};
+
+		HttpPost request = new HttpPost(urlToApi("todos"));
+		request.setHeader(SIGN_IN_TOKEN_NAME, signInToken);
 		
+		doPost(request, params);
+	}
+
+	private HttpResponse doPost(HttpPost request, List<NameValuePair> params) {
+		HttpResponse response;
+		try {
+			request.setEntity(new UrlEncodedFormEntity(params));
+			response = new DefaultHttpClient().execute(request);
+		} catch (Exception e) {
+			throw new OhfmException(e);
+		}
+		return response;
 	}
 
 	private String fetch(HttpUriRequest request) {

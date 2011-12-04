@@ -35,7 +35,7 @@ public class ServerStub extends Server {
 	}
 
 	@Override
-	public void updateStatus(TodoItem todoItem) {
+	public void updateStatus(TodoItem todoItem, String signInToken) {
 	}
 
 }

@@ -23,7 +23,7 @@ public class TodoItem {
 		return title;
 	}
 
-	public boolean isDone() {
+	public Boolean isDone() {
 		return done;
 	}
 
@@ -31,11 +31,11 @@ public class TodoItem {
 		this.done = done;
 	}
 
-	public int getHabitId() {
+	public Integer getHabitId() {
 		return habitId;
 	}
 
-	public int getExecutionId() {
+	public Integer getExecutionId() {
 		return executionId;
 	}
 
