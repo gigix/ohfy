@@ -47,6 +47,12 @@ describe ApiController do
       
       execution.reload
       execution.should be_acted(habit)
+      
+      post :todos, :execution_id => execution.id, :habit_id => habit.id, :done => "false"
+      response.should be_success
+      
+      execution.reload
+      execution.should_not be_acted(habit)      
     end
     
     it "fails without sign in token" do

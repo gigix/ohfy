@@ -12,7 +12,7 @@ namespace :e2e do
   task :test do
     cd RAILS_ROOT do
       exec "rake"
-      exec "rake db:reset db:test:load server:restart"
+      exec "rake db:reset db:test:load server:restart RAILS_ENV=test"
     end
     
     cd ANDROID_ROOT do
