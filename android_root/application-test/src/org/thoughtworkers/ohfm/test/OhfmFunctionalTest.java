@@ -14,6 +14,10 @@ import android.widget.CheckBox;
 import com.jayway.android.robotium.solo.Solo;
 
 public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmActivity> {
+	private static final String VALID_PASSWORD = "password";
+
+	private static final String VALID_EMAIL = "user@test.com";
+
 	private static final Class<OhfmActivity> ACTIVITY_UNDER_TEST = OhfmActivity.class;
 
 	private Solo solo;
@@ -52,12 +56,25 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		should_be_able_to_change_status_of_todo_items_after_signed_in();
 	}
 
-	private void should_be_able_to_change_status_of_todo_items_after_signed_in() {
+	public void test_should_remember_username_and_password_after_signed_in() throws Throwable {
+		signIn(VALID_EMAIL, VALID_PASSWORD);
+		restartApplication();
+		
+		assertEquals(VALID_EMAIL, solo.getEditText(0).getText().toString());
+		assertEquals(VALID_PASSWORD, solo.getEditText(1).getText().toString());
+	}
+
+	private void restartApplication() throws Exception {
+		tearDown();
+		setUp();
+	}
+
+	private void should_be_able_to_change_status_of_todo_items_after_signed_in() throws Exception {
 		solo.clickOnCheckBox(0);
 		solo.clickOnCheckBox(1);
-		solo.goBack();
+		restartApplication();
 		
-		signIn("user@test.com", "password");
+		signIn(VALID_EMAIL, VALID_PASSWORD);
 		assertCheckBoxIsNotChecked(0);
 		assertCheckBoxIsChecked(1);
 	}
@@ -69,12 +86,12 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 	}
 
 	private void should_allow_valid_sign_in() {
-		signIn("user@test.com", "password");
+		signIn(VALID_EMAIL, VALID_PASSWORD);
 		assertCurrentActivity(TodayActivity.class);
 	}
 
 	private void should_not_allow_invalid_sign_in() {
-		signIn("not.exist@test.com", "password");
+		signIn("not.exist@test.com", VALID_PASSWORD);
 		assertCurrentActivity(OhfmActivity.class);
 	}
 
