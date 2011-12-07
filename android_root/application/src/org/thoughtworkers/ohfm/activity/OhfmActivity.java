@@ -19,7 +19,6 @@ import android.widget.Toast;
 public class OhfmActivity extends Activity implements OnClickListener {
 	private static final String PREFERENCE_PASSWORD = "password";
 	private static final String PREFERENCE_EMAIL = "email";
-	private static final String PREFERENCES_NAME = "OhfmPreferences";
 	protected static final int MSG_LOGIN_FAIL = 0;
 	protected static final int MSG_LOGIN_SUCCESS = 1;
 
@@ -63,18 +62,12 @@ public class OhfmActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.sign_in:
-			try {
-				new Thread(new Runnable() {
-
-					@Override
-					public void run() {
-						signIn();
-					}
-
-				}).start();
-			} catch (Exception e) {
-				Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
-			}
+			new AsyncJob(this) {
+				@Override
+				protected void job() {
+					signIn();
+				}
+			}.start();
 			break;
 		default:
 			throw new RuntimeException("Unexpected click event to " + v.getId());

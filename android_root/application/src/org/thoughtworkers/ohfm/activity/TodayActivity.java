@@ -25,21 +25,27 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		server = Server.create(this);
-		addTodoItems();
+
+		new AsyncJob(this) {
+			@Override
+			protected void job() {
+				addTodoItems();
+			}
+		}.start();
 	}
 
 	private void addTodoItems() {
 		List<TodoItem> todoItems = server.fetchTodoItems(getSignInToken());
-		
+
 		LinearLayout layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
-		
+
 		for (TodoItem todoItem : todoItems) {
 			layout.addView(buildCheckBox(todoItem));
 		}
-		
+
 		setContentView(layout);
 	}
 
