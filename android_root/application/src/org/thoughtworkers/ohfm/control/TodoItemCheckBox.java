@@ -1,5 +1,6 @@
 package org.thoughtworkers.ohfm.control;
 
+import org.thoughtworkers.ohfm.activity.AsyncJob;
 import org.thoughtworkers.ohfm.domain.Server;
 import org.thoughtworkers.ohfm.domain.TodoItem;
 
@@ -10,9 +11,11 @@ import android.widget.CheckBox;
 public class TodoItemCheckBox extends CheckBox {
 
 	private final TodoItem todoItem;
+	private final Context context;
 
 	public TodoItemCheckBox(Context context, TodoItem item) {
 		super(context);
+		this.context = context;
 		todoItem = item;
 		
 		append(todoItem.getTitle());
@@ -26,10 +29,16 @@ public class TodoItemCheckBox extends CheckBox {
 		setBackgroundColor(backgroundColor(todoItem.isDone()));
 	}
 	
-	public void updateCheckedStatus(Server server, String signInToken) {
+	public void updateCheckedStatus(final Server server, final String signInToken) {
+		new AsyncJob(context) {
+			@Override
+			protected void job() {
+				server.updateStatus(todoItem, signInToken);
+			}
+		}.start();
+		
 		todoItem.setDone(isChecked());
 		updateBackgroundColor();
-		server.updateStatus(todoItem, signInToken);
 	}
 
 	private int backgroundColor(boolean done) {
