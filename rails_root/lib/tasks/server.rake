@@ -7,8 +7,11 @@ namespace :server do
   desc "Stops the rails server"
   task :stop do
     target_row = `ps aux|grep rails`.split("\n").map(&:strip).find{|row| row.include?("ruby script/rails")}
-    pid = target_row.match(/^\w+\s+(\d+)\s+/)[1]
-    `kill -9 #{pid}`
+    begin
+      pid = target_row.match(/^\w+\s+(\d+)\s+/)[1]
+      `kill -9 #{pid}`
+    rescue
+    end
   end
 
   desc "Restarts the rails server"
