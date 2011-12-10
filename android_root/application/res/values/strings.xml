@@ -6,4 +6,10 @@
     <string name="title">1 Hour For Me</string>
 
 	<string name="sign_out_label">Sign Out</string>
+	
+	<string name="quit">Quit Application</string>
+	<string name="really_quit">Are you sure to quit application?</string>
+	
+	<string name="yes">Yes</string>
+	<string name="no">No</string>
 </resources>

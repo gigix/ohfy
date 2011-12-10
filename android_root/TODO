@@ -6,16 +6,16 @@ Secure sign in token
 Fetch and display current todo items
 Mark/unmark activity
 Deploy to phone
-
-
-
-== DOING ==
 Sign out
 
 
 
-== TODO ==
+== DOING ==
 Better sign in UI
+
+
+
+== TODO ==
 Auto-signin
 Create new plan
 Register user

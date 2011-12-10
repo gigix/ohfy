@@ -73,9 +73,10 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		solo.enterText(index, text);
 	}
 
-	private void should_sign_out_and_clear_saved_credential() {
+	private void should_sign_out_and_clear_saved_credential() throws Exception {
 		solo.pressMenuItem(0);
 		assertCurrentActivity(OhfmActivity.class);
+		restartApplication();
 		assertSavedCredential("", "");
 	}
 

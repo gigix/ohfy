@@ -10,7 +10,6 @@ import org.thoughtworkers.ohfm.domain.Server;
 import org.thoughtworkers.ohfm.domain.TodoItem;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -57,7 +56,7 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 			return false;
 		}
 		signOut();
-		startActivity(new Intent(this, OhfmActivity.class));
+		finish();
 		return true;
 	}
 	
