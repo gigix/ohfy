@@ -38,4 +38,8 @@ public class ServerStub extends Server {
 	public void updateStatus(TodoItem todoItem, String signInToken) {
 	}
 
+	@Override
+	public void signOut() {
+	}
+
 }

@@ -2,12 +2,19 @@ package org.thoughtworkers.ohfm.activity;
 
 import java.util.List;
 
+import org.thoughtworkers.ohfm.R;
+import org.thoughtworkers.ohfm.control.AsyncJob;
 import org.thoughtworkers.ohfm.control.TodoItemCheckBox;
+import org.thoughtworkers.ohfm.domain.Credential;
 import org.thoughtworkers.ohfm.domain.Server;
 import org.thoughtworkers.ohfm.domain.TodoItem;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -34,6 +41,29 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 				addTodoItems();
 			}
 		}.start();
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		super.onCreateOptionsMenu(menu);
+		MenuInflater menuInflater = getMenuInflater();
+		menuInflater.inflate(R.menu.menu, menu);
+		return true;
+	}
+	
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if(item.getItemId() != R.id.sign_out) {
+			return false;
+		}
+		signOut();
+		startActivity(new Intent(this, OhfmActivity.class));
+		return true;
+	}
+	
+	private void signOut() {
+		server.signOut();
+		Credential.clear(this);
 	}
 
 	private void addTodoItems() {

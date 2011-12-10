@@ -1,6 +1,5 @@
 package org.thoughtworkers.ohfm.control;
 
-import org.thoughtworkers.ohfm.activity.AsyncJob;
 import org.thoughtworkers.ohfm.domain.Server;
 import org.thoughtworkers.ohfm.domain.TodoItem;
 
@@ -30,15 +29,15 @@ public class TodoItemCheckBox extends CheckBox {
 	}
 	
 	public void updateCheckedStatus(final Server server, final String signInToken) {
+		todoItem.setDone(isChecked());
+		updateBackgroundColor();
+
 		new AsyncJob(context) {
 			@Override
 			protected void job() {
 				server.updateStatus(todoItem, signInToken);
 			}
-		}.start();
-		
-		todoItem.setDone(isChecked());
-		updateBackgroundColor();
+		}.start();		
 	}
 
 	private int backgroundColor(boolean done) {

@@ -1,4 +1,4 @@
-package org.thoughtworkers.ohfm.activity;
+package org.thoughtworkers.ohfm.control;
 
 import android.content.Context;
 import android.widget.Toast;

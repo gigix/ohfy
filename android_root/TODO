@@ -10,10 +10,12 @@ Deploy to phone
 
 
 == DOING ==
-Auto-signin
+Sign out
 
 
 
 == TODO ==
-Error message for sign in
-Sign out
+Better sign in UI
+Auto-signin
+Create new plan
+Register user

@@ -1,12 +1,12 @@
 package org.thoughtworkers.ohfm.activity;
 
 import org.thoughtworkers.ohfm.R;
+import org.thoughtworkers.ohfm.control.AsyncJob;
+import org.thoughtworkers.ohfm.domain.Credential;
 import org.thoughtworkers.ohfm.domain.Server;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -17,11 +17,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class OhfmActivity extends Activity implements OnClickListener {
-	private static final String PREFERENCE_PASSWORD = "password";
-	private static final String PREFERENCE_EMAIL = "email";
 	protected static final int MSG_LOGIN_FAIL = 0;
 	protected static final int MSG_LOGIN_SUCCESS = 1;
-
 	private Server server;
 
 	private Handler handler = new Handler() {
@@ -53,9 +50,9 @@ public class OhfmActivity extends Activity implements OnClickListener {
 
 		server = Server.create(this);
 
-		SharedPreferences preferences = getPreferences(MODE_PRIVATE);
-		((EditText) findViewById(R.id.email)).setText(preferences.getString(PREFERENCE_EMAIL, ""));
-		((EditText) findViewById(R.id.password)).setText(preferences.getString(PREFERENCE_PASSWORD, ""));
+		Credential credential = Credential.load(this);
+		((EditText) findViewById(R.id.email)).setText(credential.getEmail());
+		((EditText) findViewById(R.id.password)).setText(credential.getPassword());
 	}
 
 	@Override
@@ -85,8 +82,7 @@ public class OhfmActivity extends Activity implements OnClickListener {
 			msg.obj = signInToken;
 			handler.sendMessage(msg);
 
-			Editor preferences = getPreferences(MODE_PRIVATE).edit();
-			preferences.putString(PREFERENCE_EMAIL, email).putString(PREFERENCE_PASSWORD, password).commit();
+			new Credential(email, password).save(this);
 
 			return;
 		}

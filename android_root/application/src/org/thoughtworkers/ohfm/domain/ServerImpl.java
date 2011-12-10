@@ -46,6 +46,11 @@ public class ServerImpl extends Server {
 	}
 
 	@Override
+	public void signOut() {
+		// TODO Implement server-side sign out (if necessary)
+	}
+
+	@Override
 	public List<TodoItem> fetchTodoItems(String signInToken) {
 		HttpGet request = new HttpGet(urlToApi("todos"));
 		request.addHeader(SIGN_IN_TOKEN_NAME, signInToken);
@@ -103,4 +108,5 @@ public class ServerImpl extends Server {
 	private String urlToApi(String apiName) {
 		return String.format("http://%s/api/%s", serverHost, apiName);
 	}
+
 }

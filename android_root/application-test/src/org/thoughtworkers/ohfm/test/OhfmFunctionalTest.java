@@ -54,14 +54,7 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		should_allow_valid_sign_in();
 		should_show_todo_items_after_signed_in();
 		should_be_able_to_change_status_of_todo_items_after_signed_in();
-	}
-
-	public void test_should_remember_username_and_password_after_signed_in() throws Throwable {
-		signIn(VALID_EMAIL, VALID_PASSWORD);
-		restartApplication();
-		
-		assertEquals(VALID_EMAIL, solo.getEditText(0).getText().toString());
-		assertEquals(VALID_PASSWORD, solo.getEditText(1).getText().toString());
+		should_sign_out_and_clear_saved_credential();
 	}
 
 	private void restartApplication() throws Exception {
@@ -69,11 +62,29 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		setUp();
 	}
 
+	private void signIn(String email, String password) {
+		enterText(0, email);
+		enterText(1, password);
+		solo.clickOnButton(0);
+	}
+
+	private void enterText(int index, String text) {
+		solo.clearEditText(index);
+		solo.enterText(index, text);
+	}
+
+	private void should_sign_out_and_clear_saved_credential() {
+		solo.pressMenuItem(0);
+		assertCurrentActivity(OhfmActivity.class);
+		assertSavedCredential("", "");
+	}
+
 	private void should_be_able_to_change_status_of_todo_items_after_signed_in() throws Exception {
 		solo.clickOnCheckBox(0);
 		solo.clickOnCheckBox(1);
 		restartApplication();
 		
+		assertSavedCredential(VALID_EMAIL, VALID_PASSWORD);
 		signIn(VALID_EMAIL, VALID_PASSWORD);
 		assertCheckBoxIsNotChecked(0);
 		assertCheckBoxIsChecked(1);
@@ -100,22 +111,16 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		assertTrue(allCheckBoxes.get(index).isChecked());
 	}
 	
+	private void assertSavedCredential(String email, String password) {
+		assertEquals(email, solo.getEditText(0).getText().toString());
+		assertEquals(password, solo.getEditText(1).getText().toString());
+	}
+
 	private void assertCheckBoxIsNotChecked(int index) {
 		ArrayList<CheckBox> allCheckBoxes = solo.getCurrentCheckBoxes();
 		assertFalse(allCheckBoxes.get(index).isChecked());
 	}
 	
-	private void signIn(String email, String password) {
-		enterText(0, email);
-		enterText(1, password);
-		solo.clickOnButton(0);
-	}
-
-	private void enterText(int index, String text) {
-		solo.clearEditText(index);
-		solo.enterText(index, text);
-	}
-
 	private void assertCurrentActivity(Class<? extends Activity> expectedClass) {
 		solo.assertCurrentActivity("Unexpected Activity!", expectedClass);
 	}

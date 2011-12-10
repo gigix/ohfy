@@ -5,4 +5,5 @@
     <string name="app_name">1HourForMe</string>
     <string name="title">1 Hour For Me</string>
 
+	<string name="sign_out_label">Sign Out</string>
 </resources>

@@ -31,4 +31,6 @@ public abstract class Server {
 	public abstract List<TodoItem> fetchTodoItems(String signInToken);
 
 	public abstract void updateStatus(TodoItem todoItem, String signInToken);
+
+	public abstract void signOut();
 }
