@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.TodayActivity" android:label="@string/title" />
+        <activity android:name=".activity.NewPlanActivity" android:label="@string/new_plan" />
     </application>
 
 </manifest>

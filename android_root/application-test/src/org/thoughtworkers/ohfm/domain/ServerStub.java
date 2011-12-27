@@ -20,6 +20,7 @@ public class ServerStub extends Server {
 		Map<String, String> validLogins = new HashMap<String, String>() {
 			{
 				put("user@test.com", "password");
+				put("empty_user@test.com", "password");
 			}
 		};
 		
@@ -31,7 +32,14 @@ public class ServerStub extends Server {
 
 	@Override
 	public List<TodoItem> fetchTodoItems(String signInToken) {
-		return todoItems;
+		@SuppressWarnings("serial")
+		Map<String, List<TodoItem>> todoItemsMap = new HashMap<String, List<TodoItem>>() {
+			{
+				put("user@test.com", todoItems);
+				put("empty_user@test.com", new ArrayList<TodoItem>());
+			}
+		};
+		return todoItemsMap.get(signInToken);
 	}
 
 	@Override

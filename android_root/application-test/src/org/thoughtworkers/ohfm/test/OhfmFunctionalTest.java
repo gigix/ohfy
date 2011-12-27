@@ -2,6 +2,7 @@ package org.thoughtworkers.ohfm.test;
 
 import java.util.ArrayList;
 
+import org.thoughtworkers.ohfm.activity.NewPlanActivity;
 import org.thoughtworkers.ohfm.activity.OhfmActivity;
 import org.thoughtworkers.ohfm.activity.TodayActivity;
 import org.thoughtworkers.ohfm.domain.Server;
@@ -33,9 +34,9 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		solo = new Solo(getInstrumentation(), getActivity());
 		assertCurrentActivity(OhfmActivity.class);
 
-		assertStringExist("Email");
-		assertStringExist("Password");
-		assertStringExist("Sign in");
+		assertTextExist("Email");
+		assertTextExist("Password");
+		assertTextExist("Sign in");
 	}
 
 	@Override
@@ -57,6 +58,18 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		should_sign_out_and_clear_saved_credential();
 	}
 
+	public void test_add_todo_items() {
+		signIn("empty_user@test.com", "password");
+		assertCurrentActivity(TodayActivity.class);
+		
+		assertTextExist("You don't have a plan yet.");
+		assertTextExist("Make A Plan For Next 30 Days");
+		
+		solo.clickOnButton(0);
+		assertCurrentActivity(NewPlanActivity.class);
+		assertTextExist("I plan to do ...");
+	}
+	
 	private void restartApplication() throws Exception {
 		tearDown();
 		setUp();
@@ -92,7 +105,7 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 	}
 
 	private void should_show_todo_items_after_signed_in() {
-		assertStringExist("学Android开发");		
+		assertTextExist("学Android开发");		
 		assertCheckBoxIsChecked(0);
 		assertCheckBoxIsNotChecked(1);
 	}
@@ -126,7 +139,7 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		solo.assertCurrentActivity("Unexpected Activity!", expectedClass);
 	}
 
-	private void assertStringExist(String expectedString) {
+	private void assertTextExist(String expectedString) {
 		assertEquals(true, solo.searchText(expectedString));
 	}
 }
