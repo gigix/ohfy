@@ -69,6 +69,10 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		assertCurrentActivity(NewPlanActivity.class);
 		assertTextExist("I plan to do ...");
 		
+		solo.clickOnButton(0);
+		assertCurrentActivity(NewPlanActivity.class);
+		assertTextExist("Please input at least ONE thing to do");
+		
 		enterText(0, "游泳");
 		enterText(1, "写开源的程序");
 		solo.clickOnButton(0);
@@ -151,6 +155,6 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 	}
 
 	private void assertTextExist(String expectedString) {
-		assertEquals(true, solo.searchText(expectedString));
+		assertTrue(String.format("Expected text [%s] doesn't exist", expectedString), solo.searchText(expectedString));
 	}
 }

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class NewPlanActivity extends Activity {
 	@Override
@@ -34,21 +35,27 @@ public class NewPlanActivity extends Activity {
 				List<TodoItem> todoItems = new ArrayList<TodoItem>();
 				for (Integer inputId : inputIds) {
 					String todoItemTitle = getInputedTodoItem(inputId);
-					if(!todoItemTitle.trim().isEmpty()) {
+					if (!todoItemTitle.trim().isEmpty()) {
 						todoItems.add(new TodoItem(todoItemTitle));
 					}
 				}
 
+				if (todoItems.isEmpty()) {
+					Toast.makeText(NewPlanActivity.this, "Please input at least ONE thing to do.", Toast.LENGTH_LONG)
+							.show();
+					return;
+				}
+
 				Server server = Server.create(NewPlanActivity.this);
 				server.createNewPlan(todoItems, getSignInToken());
-				
+
 				Intent intent = new Intent(NewPlanActivity.this, TodayActivity.class);
 				intent.putExtra(Server.SIGN_IN_TOKEN_NAME, getSignInToken());
 				startActivity(intent);
 			}
 		});
 	}
-	
+
 	private String getSignInToken() {
 		return getIntent().getStringExtra(Server.SIGN_IN_TOKEN_NAME);
 	}
