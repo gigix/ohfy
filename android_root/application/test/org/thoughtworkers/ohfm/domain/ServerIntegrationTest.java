@@ -8,6 +8,8 @@ import java.util.Properties;
 import junit.framework.TestCase;
 
 public class ServerIntegrationTest extends TestCase {
+	private static final String TITLE_PROGRAMMING = "Programming";
+	private static final String TITLE_SWIMMING = "Swimming";
 	private static final String INVALID_EMAIL = "invalid.user@test.com";
 	private static final String VALID_PASSWORD = "password";
 	private static final String VALID_EMAIL = "user@test.com";
@@ -66,16 +68,16 @@ public class ServerIntegrationTest extends TestCase {
 		String signInToken = server.signIn(VALID_EMAIL, VALID_PASSWORD);
 		ArrayList<TodoItem> todoItems = new ArrayList<TodoItem>() {
 			{
-				add(new TodoItem("游泳"));
-				add(new TodoItem("写程序"));
+				add(new TodoItem(TITLE_SWIMMING));
+				add(new TodoItem(TITLE_PROGRAMMING));
 			}
 		};
 		server.createNewPlan(todoItems, signInToken);
 		
 		List<TodoItem> fetchedTodoItems = server.fetchTodoItems(signInToken);
 		assertEquals(2, fetchedTodoItems.size());
-		assertEquals("游泳", fetchedTodoItems.get(0).getTitle());
-		assertEquals("写程序", fetchedTodoItems.get(1).getTitle());
+		assertEquals(TITLE_SWIMMING, fetchedTodoItems.get(0).getTitle());
+		assertEquals(TITLE_PROGRAMMING, fetchedTodoItems.get(1).getTitle());
 	}
 	
 	private TodoItem getFirstTodoItem(String signInToken) {

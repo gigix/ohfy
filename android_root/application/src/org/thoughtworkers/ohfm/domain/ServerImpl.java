@@ -76,9 +76,19 @@ public class ServerImpl extends Server {
 	}
 
 	@Override
-	public void createNewPlan(List<TodoItem> todoItems, String signInToken) {
-		// TODO Auto-generated method stub
+	public void createNewPlan(final List<TodoItem> todoItems, String signInToken) {
+		HttpPost request = new HttpPost(urlToApi("plans"));
+		request.setHeader(SIGN_IN_TOKEN_NAME, signInToken);
 		
+		@SuppressWarnings("serial")
+		List<NameValuePair> params = new ArrayList<NameValuePair>() {
+			{
+				for (int i = 0; i < todoItems.size(); i++) {
+					add(new BasicNameValuePair(String.format("habit_names[%d]", i), todoItems.get(i).getTitle()));
+				}
+			}
+		};
+		doPost(request, params);
 	}
 
 	private HttpResponse doPost(HttpPost request, List<NameValuePair> params) {

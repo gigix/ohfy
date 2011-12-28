@@ -26,9 +26,13 @@ class ApiController < ApplicationController
     end
   end    
   
-  def plan
-    sign_in_user.create_plan!(sign_in_user.today, params[:habit_names])
+  def plans
+    sign_in_user.create_plan!(sign_in_user.today, params[:habit_names].values)
     render :text => "Success"
+  end
+  
+  def test
+    render :text => params[:names]
   end
   
   private

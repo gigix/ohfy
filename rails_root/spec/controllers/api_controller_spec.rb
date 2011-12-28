@@ -32,13 +32,14 @@ describe ApiController do
     end
 
     it "create new plan with valid input" do
-      post :plan, :habit_names => ["Swimming", "Programming", "Sketching"]
+      post :plans, :habit_names => {"0" => "Swimming", "1" => "Programming", "2" => "Sketching"}
       @user.reload
       @user.current_plan.should have(3).habits
+      @user.current_plan.habits.first.title.should == "Swimming"
     end
     
     it "does not change current plan if input is empty" do
-      post :plan, :habit_names => [] rescue nil
+      post :plans, :habit_names => [] rescue nil
       @user.reload
       @user.current_plan.should have(2).habits
     end
