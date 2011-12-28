@@ -68,6 +68,17 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		solo.clickOnButton(0);
 		assertCurrentActivity(NewPlanActivity.class);
 		assertTextExist("I plan to do ...");
+		
+		enterText(0, "游泳");
+		enterText(1, "写开源的程序");
+		solo.clickOnButton(0);
+		
+		assertCurrentActivity(TodayActivity.class);
+		assertTextExist("游泳");
+		assertTextExist("写开源的程序");
+		
+		assertCheckBoxIsNotChecked(0);
+		assertCheckBoxIsNotChecked(1);
 	}
 	
 	private void restartApplication() throws Exception {

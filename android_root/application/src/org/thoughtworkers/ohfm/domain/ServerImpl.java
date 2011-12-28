@@ -75,6 +75,12 @@ public class ServerImpl extends Server {
 		doPost(request, params);
 	}
 
+	@Override
+	public void createNewPlan(List<TodoItem> todoItems, String signInToken) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	private HttpResponse doPost(HttpPost request, List<NameValuePair> params) {
 		HttpResponse response;
 		try {

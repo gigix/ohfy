@@ -13,6 +13,8 @@ public class ServerStub extends Server {
 			add(new TodoItem("游泳", false, 1, 102));
 		}
 	};
+	
+	private static final List<TodoItem> mutableTodoItems = new ArrayList<TodoItem>();
 
 	@Override
 	public String signIn(String email, String password) {
@@ -36,7 +38,7 @@ public class ServerStub extends Server {
 		Map<String, List<TodoItem>> todoItemsMap = new HashMap<String, List<TodoItem>>() {
 			{
 				put("user@test.com", todoItems);
-				put("empty_user@test.com", new ArrayList<TodoItem>());
+				put("empty_user@test.com", mutableTodoItems);
 			}
 		};
 		return todoItemsMap.get(signInToken);
@@ -50,4 +52,10 @@ public class ServerStub extends Server {
 	public void signOut() {
 	}
 
+	@Override
+	public void createNewPlan(List<TodoItem> todoItems, String signInToken) {
+		for (TodoItem todoItem : todoItems) {
+			mutableTodoItems.add(todoItem);
+		}
+	}
 }

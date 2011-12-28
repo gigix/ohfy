@@ -19,6 +19,10 @@ public class TodoItem {
 		this.habitId = habitId;
 	}
 	
+	public TodoItem(String title) {
+		this(title, false, 0, 0);
+	}
+
 	public String getTitle() {
 		return title;
 	}

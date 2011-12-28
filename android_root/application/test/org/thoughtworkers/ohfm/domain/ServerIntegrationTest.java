@@ -1,6 +1,7 @@
 package org.thoughtworkers.ohfm.domain;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
@@ -60,6 +61,23 @@ public class ServerIntegrationTest extends TestCase {
 		assertTrue(todoItem.isDone());
 	}
 
+	@SuppressWarnings("serial")
+	public void test_should_create_new_plan() throws Exception {
+		String signInToken = server.signIn(VALID_EMAIL, VALID_PASSWORD);
+		ArrayList<TodoItem> todoItems = new ArrayList<TodoItem>() {
+			{
+				add(new TodoItem("游泳"));
+				add(new TodoItem("写程序"));
+			}
+		};
+		server.createNewPlan(todoItems, signInToken);
+		
+		List<TodoItem> fetchedTodoItems = server.fetchTodoItems(signInToken);
+		assertEquals(2, fetchedTodoItems.size());
+		assertEquals("游泳", fetchedTodoItems.get(0).getTitle());
+		assertEquals("写程序", fetchedTodoItems.get(1).getTitle());
+	}
+	
 	private TodoItem getFirstTodoItem(String signInToken) {
 		List<TodoItem> todoItems = server.fetchTodoItems(signInToken);
 		TodoItem firstTodoItem = todoItems.get(0);

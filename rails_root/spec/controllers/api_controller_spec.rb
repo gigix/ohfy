@@ -24,6 +24,26 @@ describe ApiController do
     end
   end
   
+  describe :plans do 
+    before(:each) do
+      post :sign_in, :email => @user.email, :password => @user.password
+      sign_in_token = response.header[ApiController::SIGN_IN_TOKEN_NAME]
+      request.env[ApiController::SIGN_IN_TOKEN_NAME] = sign_in_token
+    end
+
+    it "create new plan with valid input" do
+      post :plan, :habit_names => ["Swimming", "Programming", "Sketching"]
+      @user.reload
+      @user.current_plan.should have(3).habits
+    end
+    
+    it "does not change current plan if input is empty" do
+      post :plan, :habit_names => [] rescue nil
+      @user.reload
+      @user.current_plan.should have(2).habits
+    end
+  end
+  
   describe :todos do
     before(:each) do
       post :sign_in, :email => @user.email, :password => @user.password

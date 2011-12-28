@@ -33,4 +33,6 @@ public abstract class Server {
 	public abstract void updateStatus(TodoItem todoItem, String signInToken);
 
 	public abstract void signOut();
+
+	public abstract void createNewPlan(List<TodoItem> todoItems, String signInToken);
 }
