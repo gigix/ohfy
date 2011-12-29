@@ -1,3 +1,4 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item android:id="@+id/new_plan" android:title="@string/new_plan_label" />
 	<item android:id="@+id/sign_out" android:title="@string/sign_out_label" />
 </menu>

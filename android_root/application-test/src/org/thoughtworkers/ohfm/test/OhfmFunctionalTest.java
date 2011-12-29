@@ -58,7 +58,7 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		should_sign_out_and_clear_saved_credential();
 	}
 
-	public void test_add_todo_items() {
+	public void test_add_todo_items() throws Exception {
 		signIn("empty_user@test.com", "password");
 		assertCurrentActivity(TodayActivity.class);
 		
@@ -78,11 +78,16 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		solo.clickOnButton(0);
 		
 		assertCurrentActivity(TodayActivity.class);
-		assertTextExist("游泳");
-		assertTextExist("写开源的程序");
 		
+		restartApplication();
+		signIn("empty_user@test.com", "password");
+		assertTextExist("游泳");
+		assertTextExist("写开源的程序");		
 		assertCheckBoxIsNotChecked(0);
 		assertCheckBoxIsNotChecked(1);
+		
+		solo.pressMenuItem(0);
+		assertCurrentActivity(NewPlanActivity.class);
 	}
 	
 	private void restartApplication() throws Exception {
@@ -102,7 +107,7 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 	}
 
 	private void should_sign_out_and_clear_saved_credential() throws Exception {
-		solo.pressMenuItem(0);
+		solo.pressMenuItem(1);
 		assertCurrentActivity(OhfmActivity.class);
 		restartApplication();
 		assertSavedCredential("", "");

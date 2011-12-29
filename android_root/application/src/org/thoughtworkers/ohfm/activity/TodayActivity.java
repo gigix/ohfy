@@ -57,12 +57,23 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		if (item.getItemId() != R.id.sign_out) {
+		switch (item.getItemId()) {
+		case R.id.sign_out:
+			signOut();
+			finish();
+			return true;
+		case R.id.new_plan:
+			newPlan();
+			return true;
+		default:
 			return false;
 		}
-		signOut();
-		finish();
-		return true;
+	}
+
+	private void newPlan() {
+		Intent intent = new Intent(this, NewPlanActivity.class);
+		intent.putExtra(Server.SIGN_IN_TOKEN_NAME, getSignInToken());
+		startActivity(intent);
 	}
 
 	private void signOut() {

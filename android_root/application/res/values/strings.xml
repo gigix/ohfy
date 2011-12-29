@@ -6,6 +6,7 @@
     <string name="title">1 Hour For Me</string>
     <string name="new_plan">Add A New Plan</string>
 
+	<string name="new_plan_label">Create New Plan</string>
 	<string name="sign_out_label">Sign Out</string>
 	
 	<string name="quit">Quit Application</string>
