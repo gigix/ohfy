@@ -1,5 +1,5 @@
 <ul class="plans">
-	<% current_user.plans.each do |plan| %>
+	<% current_user.plans.reverse.each do |plan| %>
 		<li>
 			<div class="plan_card">
 				<h4><%= link_to plan.title, plan_path(plan) %></h4>
