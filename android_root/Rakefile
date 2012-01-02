@@ -30,6 +30,7 @@ end
 
 task :release => :prepare_release_settings do
   exec "ant -f #{application_dir}/build.xml clean release"
+  exec "scp #{application_dir}/bin/1HourForMe-release.apk ohfy@hourfor.me:~/ohfy/rails_root/public/apps/"
 end
 
 task :prepare_release_settings do

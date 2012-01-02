@@ -17,11 +17,20 @@ namespace :e2e do
     
     cd ANDROID_ROOT do
       exec "rake"
-      exec "rake release"
     end
     
     cd RAILS_ROOT do
       exec "rake server:stop"
     end
   end
+end
+
+task :deploy do
+  cd RAILS_ROOT do
+    exec "./deploy"
+  end
+
+  cd ANDROID_ROOT do
+    exec "rake release"
+  end  
 end
