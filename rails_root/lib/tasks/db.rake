@@ -11,10 +11,13 @@ namespace :db do
     
     task :load do
       User.find(:all).each(&:destroy)
+      
       user = User.create!(:email => 'user@test.com', :password => 'password', :time_zone_name => 'Beijing')
       user.create_plan!(Date.yesterday, ['学Android开发', '游泳'])
       execution = user.execution_on_today
       execution.act!(execution.habits.first)
+      
+      User.create!(:email => 'empty_user@test.com', :password => 'password', :time_zone_name => 'Beijing')
     end
   end  
   

@@ -71,7 +71,7 @@ public class ServerImpl extends Server {
 
 		HttpPost request = new HttpPost(urlToApi("todos"));
 		request.setHeader(SIGN_IN_TOKEN_NAME, signInToken);
-		
+
 		doPost(request, params);
 	}
 
@@ -79,12 +79,12 @@ public class ServerImpl extends Server {
 	public void createNewPlan(final List<TodoItem> todoItems, String signInToken) {
 		HttpPost request = new HttpPost(urlToApi("plans"));
 		request.setHeader(SIGN_IN_TOKEN_NAME, signInToken);
-		
+
 		@SuppressWarnings("serial")
 		List<NameValuePair> params = new ArrayList<NameValuePair>() {
 			{
 				for (int i = 0; i < todoItems.size(); i++) {
-					add(new BasicNameValuePair(String.format("habit_names[%d]", i), todoItems.get(i).getTitle()));
+					add(new BasicNameValuePair(String.format("habit_names[%d]", i), todoItems.get(i).getTitleEncoded()));
 				}
 			}
 		};

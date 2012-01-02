@@ -27,7 +27,8 @@ class ApiController < ApplicationController
   end    
   
   def plans
-    sign_in_user.create_plan!(sign_in_user.today, params[:habit_names].values)
+    habit_names = params[:habit_names].values.map{|name| URI.unescape(name)}
+    sign_in_user.create_plan!(sign_in_user.today, habit_names)
     render :text => "Success"
   end
   

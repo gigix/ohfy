@@ -28,7 +28,7 @@ end
 
 
 def create_test_user
-  User.create!(:email => 'empty_user@test.com', :password => 'P@55w0rd', :time_zone_name => 'Beijing')
+  User.create!(:email => "empty_user_#{rand(Time.now.to_f)}@test.com", :password => 'P@55w0rd', :time_zone_name => 'Beijing')
 end
 
 def create_user_with_plans
