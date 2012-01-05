@@ -14,4 +14,9 @@
 	
 	<string name="yes">Yes</string>
 	<string name="no">No</string>
+	
+	<string name="introduction">
+		Don\'t have an account yet? 
+		<a href="http://1.hourfor.me/users/sign_up">SIGN UP</a> now!
+	</string>
 </resources>

@@ -10,6 +10,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
@@ -45,6 +47,10 @@ public class OhfmActivity extends Activity implements OnClickListener {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+		TextView introText = (TextView) findViewById(R.id.app_intro);
+		Linkify.addLinks(introText, Linkify.WEB_URLS);
+		introText.setMovementMethod(LinkMovementMethod.getInstance());
 
 		findViewById(R.id.sign_in).setOnClickListener(this);
 

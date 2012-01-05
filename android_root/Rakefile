@@ -28,8 +28,11 @@ task :prepare_test_settings do
   generate_settings_file(test_settings_file, test_settings_template)
 end
 
-task :release => :prepare_release_settings do
+task :build_release => :prepare_release_settings do
   exec "ant -f #{application_dir}/build.xml clean release"
+end
+
+task :release => :build_release do
   exec "scp #{application_dir}/bin/1HourForMe-release.apk ohfy@hourfor.me:~/ohfy/rails_root/public/apps/"
 end
 
