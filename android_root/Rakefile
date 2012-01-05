@@ -32,8 +32,12 @@ task :build_release => :prepare_release_settings do
   exec "ant -f #{application_dir}/build.xml clean release"
 end
 
-task :release => :build_release do
+task :release => [:build_release, :release_to_git_hub] do
   exec "scp #{application_dir}/bin/1HourForMe-release.apk ohfy@hourfor.me:~/ohfy/rails_root/public/apps/"
+end
+
+task :release_to_git_hub do
+  puts "TODO: release application to github here~"
 end
 
 task :prepare_release_settings do
