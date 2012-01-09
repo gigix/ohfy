@@ -37,7 +37,21 @@ task :release => [:build_release, :release_to_git_hub] do
 end
 
 task :release_to_git_hub do
-  puts "TODO: release application to github here~"
+  require 'net/github-upload'
+
+  login = `git config github.user`.chomp  # your login for github
+  token = `git config github.token`.chomp # your token for github
+  repos = 'ohfy'
+  gh = Net::GitHub::Upload.new(
+    :login => login,
+    :token => token
+  )
+
+  direct_link = gh.replace(
+    :repos => repos,
+    :file  => File.join(File.dirname(__FILE__), 'application/bin/1HourForMe-release.apk'),
+    :description => "1.HourFor.Me Android Application (Uploaded @ #{Time.now})"
+  )
 end
 
 task :prepare_release_settings do

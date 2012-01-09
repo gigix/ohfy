@@ -1,0 +1,20 @@
+GEM
+  remote: http://gemcutter.org/
+  specs:
+    faster_xml_simple (0.5.0)
+      libxml-ruby (>= 0.3.8.4)
+    httpclient (2.2.4)
+    json (1.6.4)
+    libxml-ruby (2.2.2)
+    net-github-upload (0.0.7)
+      faster_xml_simple
+      httpclient
+      json
+      nokogiri (>= 1.4.0)
+    nokogiri (1.5.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  net-github-upload
