@@ -51,7 +51,7 @@ public class ServerImpl extends Server {
 	}
 
 	@Override
-	public List<TodoItem> fetchTodoItems(String signInToken) {
+	public List<TodoItem> fetchTodoItems(String signInToken, boolean yesterday) {
 		HttpGet request = new HttpGet(urlToApi("todos"));
 		request.addHeader(SIGN_IN_TOKEN_NAME, signInToken);
 		String content = fetch(request);

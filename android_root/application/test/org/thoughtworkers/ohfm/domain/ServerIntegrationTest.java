@@ -38,7 +38,7 @@ public class ServerIntegrationTest extends TestCase {
 
 	public void test_should_fetch_todo_items_with_valid_sign_in_token() throws Exception {
 		String signInToken = server.signIn(VALID_EMAIL, VALID_PASSWORD);
-		List<TodoItem> todoItems = server.fetchTodoItems(signInToken);
+		List<TodoItem> todoItems = server.fetchTodoItems(signInToken, false);
 		assertEquals(2, todoItems.size());
 
 		TodoItem firstTodoItem = todoItems.get(0);
@@ -75,7 +75,7 @@ public class ServerIntegrationTest extends TestCase {
 		};
 		server.createNewPlan(todoItems, signInToken);
 		
-		List<TodoItem> fetchedTodoItems = server.fetchTodoItems(signInToken);
+		List<TodoItem> fetchedTodoItems = server.fetchTodoItems(signInToken, false);
 		assertEquals(2, fetchedTodoItems.size());
 //		This test doesn't work with Chinese for some reason...
 //		assertEquals(TITLE_SWIMMING, fetchedTodoItems.get(0).getTitle());
@@ -83,7 +83,7 @@ public class ServerIntegrationTest extends TestCase {
 	}
 	
 	private TodoItem getFirstTodoItem(String signInToken) {
-		List<TodoItem> todoItems = server.fetchTodoItems(signInToken);
+		List<TodoItem> todoItems = server.fetchTodoItems(signInToken, false);
 		TodoItem firstTodoItem = todoItems.get(0);
 		return firstTodoItem;
 	}

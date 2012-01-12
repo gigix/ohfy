@@ -57,6 +57,18 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		should_be_able_to_change_status_of_todo_items_after_signed_in();
 		should_sign_out_and_clear_saved_credential();
 	}
+	
+	public void test_switch_between_yesterday_and_today() throws Exception {
+		signIn(VALID_EMAIL, VALID_PASSWORD);
+		assertTextExist("<< Yesterday");
+		solo.clickOnButton("<< Yesterday");
+		
+		assertCurrentActivity(TodayActivity.class);
+		assertTextExist("Today >>");
+		solo.clickOnButton("Today >>");
+		
+		assertTextExist("<< Yesterday");
+	}
 
 	public void test_add_todo_items() throws Exception {
 		signIn("empty_user@test.com", "password");

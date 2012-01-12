@@ -28,7 +28,7 @@ public abstract class Server {
 
 	public abstract String signIn(String email, String password);
 
-	public abstract List<TodoItem> fetchTodoItems(String signInToken);
+	public abstract List<TodoItem> fetchTodoItems(String signInToken, boolean yesterday);
 
 	public abstract void updateStatus(TodoItem todoItem, String signInToken);
 

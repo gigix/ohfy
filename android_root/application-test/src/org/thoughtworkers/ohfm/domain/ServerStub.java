@@ -33,7 +33,7 @@ public class ServerStub extends Server {
 	}
 
 	@Override
-	public List<TodoItem> fetchTodoItems(String signInToken) {
+	public List<TodoItem> fetchTodoItems(String signInToken, boolean yesterday) {
 		@SuppressWarnings("serial")
 		Map<String, List<TodoItem>> todoItemsMap = new HashMap<String, List<TodoItem>>() {
 			{

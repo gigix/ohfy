@@ -1,5 +1,7 @@
 package org.thoughtworkers.ohfm.activity;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.thoughtworkers.ohfm.R;
@@ -42,7 +44,7 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 		new AsyncJob(this) {
 			@Override
 			protected void job() {
-				renderTodoItems();
+				renderTodoItems(false);
 			}
 		}.start();
 	}
@@ -81,16 +83,17 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 		Credential.clear(this);
 	}
 
-	private void renderTodoItems() {
-		List<TodoItem> todoItems = server.fetchTodoItems(getSignInToken());
+	private void renderTodoItems(boolean yesterday) {
+		//TODO: fetch yesterday's items (and then update their status)
+		List<TodoItem> todoItems = server.fetchTodoItems(getSignInToken(), yesterday);
 
 		LinearLayout layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
 
-		if (todoItems.isEmpty()) {
+		if (todoItems.isEmpty() && !yesterday) {
 			renderNewPlanButton(layout);
 		} else {
-			renderTodoItems(todoItems, layout);
+			renderTodoItems(todoItems, layout, yesterday);
 		}
 
 		setContentView(layout);
@@ -114,10 +117,32 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 		layout.addView(newPlanButton);
 	}
 
-	private void renderTodoItems(List<TodoItem> todoItems, LinearLayout layout) {
+	private void renderTodoItems(List<TodoItem> todoItems, LinearLayout layout, boolean yesterday) {
 		for (TodoItem todoItem : todoItems) {
 			layout.addView(buildCheckBox(todoItem));
 		}
+		
+		TextView emptyLine = new TextView(this);
+		layout.addView(emptyLine);
+		
+		TextView dateDisplay = new TextView(this);
+		dateDisplay.setText("Today is " + new SimpleDateFormat("EEE, MMM d, yyyy").format(new Date()));
+		layout.addView(dateDisplay);
+		
+		renderSwitchButton(layout, yesterday);
+	}
+
+	private void renderSwitchButton(LinearLayout layout, final boolean yesterday) {
+		Button switchButton = new Button(this);
+		switchButton.setText(yesterday ? "Today >>" : "<< Yesterday");
+		layout.addView(switchButton);
+		
+		switchButton.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				renderTodoItems(!yesterday);
+			}
+		});
 	}
 
 	private String getSignInToken() {
