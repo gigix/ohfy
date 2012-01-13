@@ -14,7 +14,7 @@ class ApiController < ApplicationController
     user = sign_in_user
     
     if request.get?
-      execution = user.execution_on_today
+      execution = (params[:yesterday] == "true") ? user.execution_on_yesterday : user.execution_on_today
       render :text => execution.to_json(:only => :id, :methods => :todo_items)
     else
       execution = user.executions.find(params[:execution_id])

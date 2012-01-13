@@ -78,7 +78,11 @@ class User < ActiveRecord::Base
   end
   
   def execution_on_today
-    current_plan.execution_on(today)
+    current_plan.execution_on_today
+  end
+  
+  def execution_on_yesterday
+    current_plan.execution_on(current_plan.today - 1)
   end
   
   def share_to_sina(date_str)

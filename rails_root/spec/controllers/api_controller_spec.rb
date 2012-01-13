@@ -47,6 +47,9 @@ describe ApiController do
   
   describe :todos do
     before(:each) do
+      execution = @user.current_plan.execution_on_today
+      execution.act!(@user.current_plan.habits.first)
+      
       post :sign_in, :email => @user.email, :password => @user.password
       sign_in_token = response.header[ApiController::SIGN_IN_TOKEN_NAME]
       request.env[ApiController::SIGN_IN_TOKEN_NAME] = sign_in_token
@@ -56,6 +59,13 @@ describe ApiController do
       get :todos
       response.body.should be_include("Swimming")
       response.body.should be_include("Drawing")
+      response.body.should be_include("true")
+    end
+    
+    it "returns activities of yesterday if specified" do
+      get :todos, :yesterday => true
+      response.body.should be_include("Swimming")
+      response.body.should_not be_include("true")
     end
     
     it "updates execution status" do

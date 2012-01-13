@@ -47,6 +47,18 @@ public class ServerIntegrationTest extends TestCase {
 		TodoItem secondTodoItem = todoItems.get(1);
 		assertFalse(secondTodoItem.isDone());
 	}
+	
+	public void test_should_fetch_todo_item_from_yesterday() throws Exception {
+		String signInToken = server.signIn(VALID_EMAIL, VALID_PASSWORD);
+		List<TodoItem> todoItems = server.fetchTodoItems(signInToken, true);
+		assertEquals(2, todoItems.size());
+
+		TodoItem firstTodoItem = todoItems.get(0);
+		assertFalse(firstTodoItem.isDone());
+
+		TodoItem secondTodoItem = todoItems.get(1);
+		assertFalse(secondTodoItem.isDone());
+	}
 
 	public void test_should_update_status_of_todo_item() throws Exception {
 		String signInToken = server.signIn(VALID_EMAIL, VALID_PASSWORD);
