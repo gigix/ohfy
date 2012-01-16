@@ -16,6 +16,16 @@ public class ServerStub extends Server {
 	
 	private static final List<TodoItem> mutableTodoItems = new ArrayList<TodoItem>();
 
+	private final boolean hasYesterday;
+
+	public ServerStub(boolean hasYesterday) {
+		this.hasYesterday = hasYesterday;
+	}
+
+	public ServerStub() {
+		this(true);
+	}
+
 	@Override
 	public String signIn(String email, String password) {
 		@SuppressWarnings("serial")
@@ -34,6 +44,10 @@ public class ServerStub extends Server {
 
 	@Override
 	public List<TodoItem> fetchTodoItems(String signInToken, boolean yesterday) {
+		if(!hasYesterday && yesterday) {
+			return new ArrayList<TodoItem>();
+		}
+		
 		@SuppressWarnings("serial")
 		Map<String, List<TodoItem>> todoItemsMap = new HashMap<String, List<TodoItem>>() {
 			{

@@ -68,6 +68,13 @@ public class OhfmFunctionalTest extends ActivityInstrumentationTestCase2<OhfmAct
 		solo.clickOnButton("Today >>");
 		
 		assertTextExist("<< Yesterday");
+		
+		restartApplication();
+		Server.setInstance(new ServerStub(false));
+
+		signIn(VALID_EMAIL, VALID_PASSWORD);
+		solo.clickOnButton("<< Yesterday");
+		assertTextExist("You don't have todo item yesterday.");
 	}
 
 	public void test_add_todo_items() throws Exception {

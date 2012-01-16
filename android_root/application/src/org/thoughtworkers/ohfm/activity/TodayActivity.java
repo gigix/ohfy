@@ -84,14 +84,14 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 	}
 
 	private void renderTodoItems(boolean yesterday) {
-		//TODO: fetch yesterday's items (and then update their status)
+		// TODO: fetch yesterday's items (and then update their status)
 		List<TodoItem> todoItems = server.fetchTodoItems(getSignInToken(), yesterday);
 
 		LinearLayout layout = new LinearLayout(this);
 		layout.setOrientation(LinearLayout.VERTICAL);
 
-		if (todoItems.isEmpty() && !yesterday) {
-			renderNewPlanButton(layout);
+		if (todoItems.isEmpty()) {
+			renderEmptyDay(layout, yesterday);
 		} else {
 			renderTodoItems(todoItems, layout, yesterday);
 		}
@@ -99,11 +99,23 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 		setContentView(layout);
 	}
 
+	private void renderEmptyDay(LinearLayout layout, boolean yesterday) {
+		if (yesterday) {
+			TextView message = new TextView(this);
+			message.setText("\n\nYou don't have todo item yesterday. \nPlease switch back.\n\n");
+			layout.addView(message);
+
+			renderSwitchButton(layout, yesterday);
+		} else {
+			renderNewPlanButton(layout);
+		}
+	}
+
 	private void renderNewPlanButton(LinearLayout layout) {
 		TextView message = new TextView(this);
 		message.setText("\n\nYou don't have a plan yet. How about ...\n\n");
 		layout.addView(message);
-		
+
 		Button newPlanButton = new Button(this);
 		newPlanButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -121,22 +133,32 @@ public class TodayActivity extends Activity implements OnCheckedChangeListener {
 		for (TodoItem todoItem : todoItems) {
 			layout.addView(buildCheckBox(todoItem));
 		}
-		
+
 		TextView emptyLine = new TextView(this);
 		layout.addView(emptyLine);
-		
+
 		TextView dateDisplay = new TextView(this);
-		dateDisplay.setText("Today is " + new SimpleDateFormat("EEE, MMM d, yyyy").format(new Date()));
+		dateDisplay.setText(dateDescription(yesterday));
 		layout.addView(dateDisplay);
-		
+
 		renderSwitchButton(layout, yesterday);
+	}
+
+	private String dateDescription(boolean yesterday) {
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEE, MMM d, yyyy");
+		if (yesterday) {
+			Date date = new Date();
+			date.setDate(new Date().getDate() - 1);
+			return "Showing yesterday: " + simpleDateFormat.format(date);
+		}
+		return "Today is " + simpleDateFormat.format(new Date());
 	}
 
 	private void renderSwitchButton(LinearLayout layout, final boolean yesterday) {
 		Button switchButton = new Button(this);
 		switchButton.setText(yesterday ? "Today >>" : "<< Yesterday");
 		layout.addView(switchButton);
-		
+
 		switchButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View arg0) {

@@ -63,14 +63,14 @@ describe ApiController do
     end
     
     it "returns activities of yesterday if specified" do
-      get :todos, :yesterday => true
+      get :todos, :yesterday => "true"
       response.body.should be_include("Swimming")
       response.body.should_not be_include("true")
     end
     
     it "updates execution status" do
       execution = @user.execution_on_today
-      habit = execution.habits.first
+      habit = execution.habits.last
       execution.should_not be_acted(habit)
       
       post :todos, :execution_id => execution.id, :habit_id => habit.id, :done => "true"
