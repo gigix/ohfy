@@ -17,7 +17,7 @@ public abstract class AsyncJob {
 				public void run() {
 					job();
 				}
-			}).run();
+			}).start();
 		} catch (Exception e) {
 			Toast.makeText(context, e.getMessage(), Toast.LENGTH_LONG).show();
 		}
