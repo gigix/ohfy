@@ -26,7 +26,7 @@ module OauthChina
 
     def add_status(content, options = {})
       options.merge!(:status => content)
-      self.post("http://api.t.sina.com.cn/statuses/update.json", options)
+      self.post("http://api.weibo.com/2/statuses/update.json", options)
     end
   end
 end
